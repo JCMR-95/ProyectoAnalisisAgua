@@ -18,7 +18,8 @@ class TablaQuimicosRio extends Migration
 
             $table->bigIncrements('id');
             $table->timestamps();
-
+			
+			$table->integer('idRio');
             $table->string('fecha');
 
             $table->float('aluminio')->nullable();

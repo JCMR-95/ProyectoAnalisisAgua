@@ -15,9 +15,7 @@ class ExcelImport implements ToModel
     public function model(array $row)
     {
 
-        dd("Listo");
-        return new Excel([
-            
-        ]);
+        dd($row[0]);
+
     }
 }

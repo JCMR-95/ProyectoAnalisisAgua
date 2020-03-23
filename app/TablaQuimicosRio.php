@@ -17,6 +17,28 @@ class TablaQuimicosRio extends Authenticatable
      */
     protected $fillable = [
         'aluminio', 'unidadAluminio',
+        'arsenico', 'unidadArsenico',
+        'boro', 'unidadBoro',
+        'cloro', 'unidadCloro',
+        'cadmio', 'unidadCadmio',
+        'calcio', 'unidadCalcio',
+        'cobre', 'unidadCobre',
+        'cromo', 'unidadCromo',
+        'hierro', 'unidadHierro',
+        'fosfato', 'unidadFosfato',
+        'magnesio', 'unidadMagnesio',
+        'manganeso', 'unidadManganeso',
+        'molibdeno', 'unidadMolibdeno',
+        'nitrato', 'unidadNitrato',
+        'niquel', 'unidadNiquel',
+        'oxigeno', 'unidadOxigeno',
+        'ph', 'unidadPh',
+        'plata', 'unidadPlata',
+        'plomo', 'unidadPlomo',
+        'potasio', 'unidadPotasio',
+        'selenio', 'unidadSelenio',
+        'sodio', 'unidadSodio',
+        'zinc', 'unidadZinc'
     ];
 
 

@@ -19,7 +19,7 @@ class TablaQuimicosRios extends Migration
             $table->bigIncrements('id');
             $table->timestamps();
 			
-			$table->integer('idRio')->nullable();
+			$table->integer('idPuntoRio')->nullable();
             $table->string('fecha')->nullable();
 
             $table->float('aluminio')->nullable();

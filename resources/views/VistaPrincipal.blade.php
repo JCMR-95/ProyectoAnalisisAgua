@@ -9,7 +9,7 @@
     <body>
         <h1>Importar datos</h1>
 
-        <form action="{{ route('datos.import.excel') }}" method="post" enctype="multipart/form-data">
+        <form action="{{ route('import.quimicosRio') }}" method="post" enctype="multipart/form-data">
             @csrf
             
             @if(Session::has('message'))
@@ -18,7 +18,20 @@
 
             <input type="file" name="file">
 
-            <button>Importar Excel</button>
+            <button>Importar Excel - Químicos del Río</button>
         </form>
+
+        <form action="{{ route('import.infoRio') }}" method="post" enctype="multipart/form-data">
+            @csrf
+            
+            @if(Session::has('message'))
+            <p>{{ Session::get('message') }}</p>
+            @endif
+
+            <input type="file" name="file">
+
+            <button>Importar Excel - Información del Río</button>
+        </form>
+
     </body>
 </html>

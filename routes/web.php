@@ -17,4 +17,5 @@ Route::get('/', function () {
     return view('VistaPrincipal');
 });
 
-Route::post('import-list-excel', 'ExcelController@importExcel')->name('datos.import.excel');
+Route::post('import-list-excel1', 'ExcelController@importExcelQuimicos')->name('import.quimicosRio');
+Route::post('import-list-excel2', 'ExcelController@importExcelInfo')->name('import.infoRio');

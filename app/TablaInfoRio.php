@@ -6,7 +6,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-class TablaInfosRio extends Authenticatable
+class TablaInfoRio extends Authenticatable
 {
     use Notifiable;
 
@@ -16,7 +16,8 @@ class TablaInfosRio extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'aluminio', 'unidadAluminio','unidadZinc'
+        
+        'idPuntoRio', 'puntoMedicion','latitud','longitud','altura'
     ];
 
 

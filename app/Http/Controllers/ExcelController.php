@@ -5,7 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 
-use App\Imports\ExcelImport;
+use App\Imports\ExcelImportQuimicos;
+use App\Imports\ExcelImportInfo;
 
 
 
@@ -16,7 +17,7 @@ class ExcelController extends Controller
     {
 
         $file = $request->file('file');
-        Excel::import(new ExcelImport, $file);
+        Excel::import(new ExcelImportQuimicos, $file);
 
         return back()->with('message', 'Importanción completada');
     }
@@ -25,7 +26,7 @@ class ExcelController extends Controller
     {
 
         $file = $request->file('file');
-        Excel::import(new ExcelImport, $file);
+        Excel::import(new ExcelImportInfo, $file);
 
         return back()->with('message', 'Importanción completada');
     }

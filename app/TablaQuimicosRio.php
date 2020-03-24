@@ -16,6 +16,9 @@ class TablaQuimicosRio extends Authenticatable
      * @var array
      */
     protected $fillable = [
+
+        'idPuntoRio',
+        'fecha',
         'aluminio', 'unidadAluminio',
         'arsenico', 'unidadArsenico',
         'boro', 'unidadBoro',

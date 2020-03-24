@@ -18,7 +18,7 @@ class TablaInfoRios extends Migration
             $table->bigIncrements('id');
             $table->timestamps();
 			
-			$table->integer('idPuntoRio')->nullable();
+			$table->string('idPuntoRio')->nullable();
             $table->string('puntoMedicion')->nullable();
             $table->float('latitud')->nullable();
             $table->float('longitud')->nullable();

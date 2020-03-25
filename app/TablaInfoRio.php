@@ -17,7 +17,18 @@ class TablaInfoRio extends Authenticatable
      */
     protected $fillable = [
         
-        'idPuntoRio', 'puntoMedicion','latitud','longitud','altura'
+        'idPuntoRio',
+        'nombreEstacion',
+        'codBNA', 
+        'altitud',
+        'cuenca',
+        'latitud',
+        'longitud',
+        'utmNorte',
+        'unidadNorteUTM',
+        'utmEste',
+        'unidadEsteUTM'
+
     ];
 
 

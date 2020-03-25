@@ -18,10 +18,17 @@ class ExcelImportInfo implements ToModel
         return new TablaInfoRio([
 
             'idPuntoRio'   => $row[0],
-            'puntoMedicion' => $row[1],
-            'latitud' => $row[2], 
-            'longitud' => $row[3],
-            'altura' => $row[4]
+            'nombreEstacion' => $row[1],
+            'codBNA' => $row[2], 
+            'altitud' => $row[3],
+            'cuenca' => $row[4],
+            'latitud' => $row[5],
+            'longitud' => $row[6],
+            'utmNorte' => $row[7],
+            'unidadNorteUTM' => $row[8],
+            'utmEste' => $row[9],
+            'unidadEsteUTM' => $row[10]
+
             
         ]);
     }

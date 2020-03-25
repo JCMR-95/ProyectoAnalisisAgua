@@ -22,73 +22,73 @@ class TablaQuimicosRios extends Migration
 			$table->string('idPuntoRio')->nullable();
             $table->string('fecha')->nullable();
 
-            $table->float('aluminio')->nullable();
+            $table->string('aluminio')->nullable();
             $table->string('unidadAluminio')->nullable();
 
-            $table->float('arsenico')->nullable();
+            $table->string('arsenico')->nullable();
             $table->string('unidadArsenico')->nullable();
 
-            $table->float('boro')->nullable();
+            $table->string('boro')->nullable();
             $table->string('unidadBoro')->nullable();
 
-            $table->float('cloro')->nullable();
+            $table->string('cloro')->nullable();
             $table->string('unidadCloro')->nullable();
 
-            $table->float('cadmio')->nullable();
+            $table->string('cadmio')->nullable();
             $table->string('unidadCadmio')->nullable();
 
-            $table->float('calcio')->nullable();
+            $table->string('calcio')->nullable();
             $table->string('unidadCalcio')->nullable();
 
-            $table->float('cobre')->nullable();
+            $table->string('cobre')->nullable();
             $table->string('unidadCobre')->nullable();
 
-            $table->float('cromo')->nullable();
+            $table->string('cromo')->nullable();
             $table->string('unidadCromo')->nullable();
 
-            $table->float('hierro')->nullable();
+            $table->string('hierro')->nullable();
             $table->string('unidadHierro')->nullable();
 
-            $table->float('fosfato')->nullable();
+            $table->string('fosfato')->nullable();
             $table->string('unidadFosfato')->nullable();
 
-            $table->float('magnesio')->nullable();
+            $table->string('magnesio')->nullable();
             $table->string('unidadMagnesio')->nullable();
 
-            $table->float('manganeso')->nullable();
+            $table->string('manganeso')->nullable();
             $table->string('unidadManganeso')->nullable();
 
-            $table->float('molibdeno')->nullable();
+            $table->string('molibdeno')->nullable();
             $table->string('unidadMolibdeno')->nullable();
 
-            $table->float('nitrato')->nullable();
+            $table->string('nitrato')->nullable();
             $table->string('unidadNitrato')->nullable();
 
-            $table->float('niquel')->nullable();
+            $table->string('niquel')->nullable();
             $table->string('unidadNiquel')->nullable();
 
-            $table->float('oxigeno')->nullable();
+            $table->string('oxigeno')->nullable();
             $table->string('unidadOxigeno')->nullable();
 
-            $table->float('ph')->nullable();
+            $table->string('ph')->nullable();
             $table->string('unidadPH')->nullable();
 
-            $table->float('plata')->nullable();
+            $table->string('plata')->nullable();
             $table->string('unidadPlata')->nullable();
 
-            $table->float('plomo')->nullable();
+            $table->string('plomo')->nullable();
             $table->string('unidadPlomo')->nullable();
 
-            $table->float('potasio')->nullable();
+            $table->string('potasio')->nullable();
             $table->string('unidadPotasio')->nullable();
 
-            $table->float('selenio')->nullable();
+            $table->string('selenio')->nullable();
             $table->string('unidadSelenio')->nullable();
 
-            $table->float('sodio')->nullable();
+            $table->string('sodio')->nullable();
             $table->string('unidadSodio')->nullable();
 
-            $table->float('zinc')->nullable();
+            $table->string('zinc')->nullable();
             $table->string('unidadZinc')->nullable();
 
         });

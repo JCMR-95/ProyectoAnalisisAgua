@@ -19,11 +19,17 @@ class TablaInfoRios extends Migration
             $table->timestamps();
 			
 			$table->string('idPuntoRio')->nullable();
-            $table->string('puntoMedicion')->nullable();
-            $table->float('latitud')->nullable();
-            $table->float('longitud')->nullable();
-            $table->float('altura')->nullable();
-
+            $table->string('nombreEstacion')->nullable();
+            $table->string('codBNA')->nullable();
+            $table->string('altitud')->nullable();
+            $table->string('cuenca')->nullable();
+            $table->string('latitud')->nullable();
+            $table->string('longitud')->nullable();
+            $table->string('utmNorte')->nullable();
+            $table->string('unidadNorteUTM')->nullable();
+            $table->string('utmEste')->nullable();
+            $table->string('unidadEsteUTM')->nullable();
+            
             
         });
     }

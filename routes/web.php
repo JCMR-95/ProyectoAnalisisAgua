@@ -17,5 +17,7 @@ Route::get('/', function () {
     return view('VistaPrincipal');
 });
 
+Route::post('Detalles', 'RioController@verDetalles')->name('verDetalles');
+
 Route::post('import-list-excel1', 'ExcelController@importExcelQuimicos')->name('import.quimicosRio');
 Route::post('import-list-excel2', 'ExcelController@importExcelInfo')->name('import.infoRio');

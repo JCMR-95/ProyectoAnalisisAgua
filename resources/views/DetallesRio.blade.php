@@ -12,8 +12,7 @@
         <link rel="stylesheet" href="{{asset('/css/index.css')}}">
     </head>
     <body>
-
-
+    @include("navbar.navbar")
     <table id="tablaInfo" class="table table-striped table-sm">
         <thead class="thead-dark">
             <tr>

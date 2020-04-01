@@ -16,8 +16,16 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('VistaPrincipal');
 });
+Route::get('/subir', function(){
+    return view('subirHistorico');
+});
+Route::get('/verHistorico', function(){
+   return view('Historico');
+});
+Route::get('/verPrediccion', function(){
+    return view('Prediccion');
+});
 
 Route::post('Detalles', 'RioController@verDetalles')->name('verDetalles');
-
 Route::post('import-list-excel1', 'ExcelController@importExcelQuimicos')->name('import.quimicosRio');
 Route::post('import-list-excel2', 'ExcelController@importExcelInfo')->name('import.infoRio');

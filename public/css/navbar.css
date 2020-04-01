@@ -1,0 +1,87 @@
+#header{
+    width:100%;
+    height:auto;
+    background-color: white;
+    padding: 20px 0;
+}
+
+#menu{
+    position: relative;
+    background-color: #4471B5;
+    padding: 5px 0;
+}
+
+.item{
+    margin: 0 0px 0 0;
+    display: inline-block;
+    height: auto;
+    vertical-align: middle;
+}
+
+.hfeed > ul > li.item > a.link:hover{
+    background-color: #28436C;
+}
+
+.hfeed > ul > li.item > a.link{
+    border-top: 0px solid #fff;
+    border-left: 0px solid #fff;
+    border-right: 0px solid #fff;
+    border-bottom: 0px solid #fff;
+    outline: none;
+    text-decoration: none;
+    padding: 0px 10px 0px 10px;
+    line-height: 50px;
+    font-weight: normal;
+    height: 50px;
+    vertical-align: baseline;
+    text-align: left;
+    width: auto;
+    display: block;
+    color: #fff;
+    text-transform: uppercase;
+    text-decoration: none;
+    background: rgba(0, 0, 0, 0);
+    -webkit-border-radius: 0px 0px 0px 0px;
+    -moz-border-radius: 0px 0px 0px 0px;
+    -ms-border-radius: 0px 0px 0px 0px;
+    -o-border-radius: 0px 0px 0px 0px;
+    border-radius: 0px 0px 0px 0px;
+    font-family: inherit;
+    font-size: 15px;
+}
+
+.hfeed{
+    width: 1364px;
+    position: relative;
+    margin: 0 auto;
+    padding: 0 !important;
+}
+.logo-ucn{
+    width: 26%;
+    float: left;
+    margin-top: 13px;
+    padding-left:40px;
+}
+
+.logo-ceitsaza{
+    width:25%;
+    float: right;
+}
+
+.titulo{
+    position: relative;
+    text-align: center;
+    margin: auto;
+    padding-top: 20px;
+    width: 370px;
+}
+
+#header, #branding, #titulo-sitio, nav{
+    display: block;
+}
+
+div ul{
+    border: 0;
+    margin: 0;
+    vertical-align: baseline;
+}

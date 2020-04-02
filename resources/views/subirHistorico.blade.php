@@ -17,7 +17,7 @@
 
     <img src = "storage/Grafico.jpeg"/>
 
-    <h3>Seleccione Zona</h3>
+    <h3>Seleccione Zona y Elementos Químicos</h3>
 
     <form method="POST" action="{{ route('verDetalles') }}" enctype="multipart/form-data" id="form-id">
         {{ csrf_field() }}
@@ -40,7 +40,61 @@
         <div class="col-md-3">
             <div class="form-group">
                 <button type="submit" class="btn btn-primary">
-                    {{ __('Ver Información') }}
+                    {{ __('Ver Información Total') }}
+                </button>
+            </div>
+        </div>
+        </div>
+
+    </form>
+
+    <form method="POST" action="{{ route('verDetallesEspecificos') }}" enctype="multipart/form-data" id="form-id">
+        {{ csrf_field() }}
+
+
+        <select id="sector"
+                name="sector"
+                class="form-control"
+                required>
+
+            <option value="001">Junta Río Salado</option>
+            <option value="002">Angostura (CA)</option>
+            <option value="003">Sifón Ayquina</option>
+            <option value="004">Pozo Chiu Chiu</option>
+            <option value="005">Yalquincha</option>
+            <option value="006">Escorial</option>
+            <option value="007">Finca</option>
+        </select>
+
+            <input type="checkbox" name="skills[]" value="aluminio">Aluminio</br>
+            <input type="checkbox" name="skills[]" value="arsenico">Arsenico</br>
+            <input type="checkbox" name="skills[]" value="boro">Boro</br>
+            <input type="checkbox" name="skills[]" value="cloro">Cloro</br>
+            <input type="checkbox" name="skills[]" value="cadmio">Cadmio</br>
+            <input type="checkbox" name="skills[]" value="calcio">Calcio</br>
+            <input type="checkbox" name="skills[]" value="cobre">Cobre</br>
+            <input type="checkbox" name="skills[]" value="cromo">Cromo</br>
+            <input type="checkbox" name="skills[]" value="hierro">Hierro</br>
+            <input type="checkbox" name="skills[]" value="fosfato">Fosfato</br>
+            <input type="checkbox" name="skills[]" value="magnesio">Magnesio</br>
+            <input type="checkbox" name="skills[]" value="manganeso">Manganeso</br>
+            <input type="checkbox" name="skills[]" value="molibdeno">Molibdeno</br>
+            <input type="checkbox" name="skills[]" value="nitrato">Nitrato</br>
+            <input type="checkbox" name="skills[]" value="niquel">Niquel</br>
+            <input type="checkbox" name="skills[]" value="oxigeno">Oxígeno</br>
+            <input type="checkbox" name="skills[]" value="ph">PH</br>
+            <input type="checkbox" name="skills[]" value="plata">Plata</br>
+            <input type="checkbox" name="skills[]" value="plomo">Plomo</br>
+            <input type="checkbox" name="skills[]" value="potasio">Potasio</br>
+            <input type="checkbox" name="skills[]" value="selenio">Selenio</br>
+            <input type="checkbox" name="skills[]" value="sodio">Sodio</br>
+            <input type="checkbox" name="skills[]" value="zinc">Zinc</br>
+
+
+        <div class="col-md-3">
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">
+                    {{ __('Ver Información Específica') }}
                 </button>
             </div>
         </div>

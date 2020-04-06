@@ -56,20 +56,18 @@
             <tr>
             
                 <th scope="col">Fecha</th>
-                <th scope="col">Elemento 1</th>
-                <th scope="col">Unidad Elemento 1</th>
-                <th scope="col">Elemento 2</th>
-                <th scope="col">Unidad Elemento 2</th>
-                <th scope="col">Elemento 3</th>
-                <th scope="col">Unidad Elemento 3</th>
-                <th scope="col">Elemento 4</th>
-                <th scope="col">Unidad Elemento 4</th>
-                <th scope="col">Elemento 5</th>
-                <th scope="col">Unidad Elemento 5</th>
-                <th scope="col">Elemento 6</th>
-                <th scope="col">Unidad Elemento 6</th>
-                <th scope="col">Elemento 7</th>
-                <th scope="col">Unidad Elemento 7</th>
+                <th scope="col">Arsénico</th>
+                <th scope="col">Unidad Arsénico</th>
+                <th scope="col">Boro</th>
+                <th scope="col">Unidad Boro</th>
+                <th scope="col">Cobre</th>
+                <th scope="col">Unidad Cobre</th>
+                <th scope="col">Cromo</th>
+                <th scope="col">Unidad Cromo</th>
+                <th scope="col">Plomo</th>
+                <th scope="col">Unidad Plomo</th>
+                <th scope="col">Zinc</th>
+                <th scope="col">Unidad Zinc</th>
             </tr>
         </thead>
         <tbody id="myTable">
@@ -77,6 +75,18 @@
                 <tr>
                 
                     <th scope="row">{!! $datoQuimicos->fecha !!}</th>
+                    <td scope="row">{!! $datoQuimicos->arsenico !!}</td>
+                    <td scope="row">{!! $datoQuimicos->unidadArsenico !!}</td>
+                    <td scope="row">{!! $datoQuimicos->boro !!}</td>
+                    <td scope="row">{!! $datoQuimicos->unidadBoro !!}</td>
+                    <td scope="row">{!! $datoQuimicos->cobre !!}</td>
+                    <td scope="row">{!! $datoQuimicos->unidadCobre !!}</td>
+                    <td scope="row">{!! $datoQuimicos->cromo !!}</td>
+                    <td scope="row">{!! $datoQuimicos->unidadCromo !!}</td>
+                    <td scope="row">{!! $datoQuimicos->plomo !!}</td>
+                    <td scope="row">{!! $datoQuimicos->unidadPlomo !!}</td>
+                    <td scope="row">{!! $datoQuimicos->zinc !!}</td>
+                    <td scope="row">{!! $datoQuimicos->unidadZinc !!}</td>
                  
                 
                 </tr>

@@ -40,7 +40,7 @@
         <div class="col-md-3">
             <div class="form-group">
                 <button type="submit" class="btn btn-primary">
-                    {{ __('Ver Información Total') }}
+                    {{ __('Ver Toda la Información') }}
                 </button>
             </div>
         </div>
@@ -66,35 +66,10 @@
             <option value="007">Finca</option>
         </select>
 
-            <input type="checkbox" name="skills[]" value="aluminio">Aluminio</br>
-            <input type="checkbox" name="skills[]" value="arsenico">Arsenico</br>
-            <input type="checkbox" name="skills[]" value="boro">Boro</br>
-            <input type="checkbox" name="skills[]" value="cloro">Cloro</br>
-            <input type="checkbox" name="skills[]" value="cadmio">Cadmio</br>
-            <input type="checkbox" name="skills[]" value="calcio">Calcio</br>
-            <input type="checkbox" name="skills[]" value="cobre">Cobre</br>
-            <input type="checkbox" name="skills[]" value="cromo">Cromo</br>
-            <input type="checkbox" name="skills[]" value="hierro">Hierro</br>
-            <input type="checkbox" name="skills[]" value="fosfato">Fosfato</br>
-            <input type="checkbox" name="skills[]" value="magnesio">Magnesio</br>
-            <input type="checkbox" name="skills[]" value="manganeso">Manganeso</br>
-            <input type="checkbox" name="skills[]" value="molibdeno">Molibdeno</br>
-            <input type="checkbox" name="skills[]" value="nitrato">Nitrato</br>
-            <input type="checkbox" name="skills[]" value="niquel">Niquel</br>
-            <input type="checkbox" name="skills[]" value="oxigeno">Oxígeno</br>
-            <input type="checkbox" name="skills[]" value="ph">PH</br>
-            <input type="checkbox" name="skills[]" value="plata">Plata</br>
-            <input type="checkbox" name="skills[]" value="plomo">Plomo</br>
-            <input type="checkbox" name="skills[]" value="potasio">Potasio</br>
-            <input type="checkbox" name="skills[]" value="selenio">Selenio</br>
-            <input type="checkbox" name="skills[]" value="sodio">Sodio</br>
-            <input type="checkbox" name="skills[]" value="zinc">Zinc</br>
-
-
         <div class="col-md-3">
             <div class="form-group">
                 <button type="submit" class="btn btn-primary">
-                    {{ __('Ver Información Específica') }}
+                    {{ __('Ver Información Importante') }}
                 </button>
             </div>
         </div>

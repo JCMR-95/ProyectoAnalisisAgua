@@ -107,5 +107,11 @@ class RioController extends Controller
 
     }
 
+    public function verPrediccion(Request $request)
+    {
+        dd("Wena men");
+
+    }
+
 
 }

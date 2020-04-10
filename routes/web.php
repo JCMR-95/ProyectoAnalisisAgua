@@ -28,5 +28,6 @@ Route::get('/verPrediccion', function(){
 
 Route::post('Detalles', 'RioController@verDetalles')->name('verDetalles');
 Route::post('DetallesEspecificos', 'RioController@verDetallesEspecificos')->name('verDetallesEspecificos');
+Route::post('VerPrediccion', 'RioController@verPrediccion')->name('verPrediccion');
 Route::post('import-list-excel1', 'ExcelController@importExcelQuimicos')->name('import.quimicosRio');
 Route::post('import-list-excel2', 'ExcelController@importExcelInfo')->name('import.infoRio');

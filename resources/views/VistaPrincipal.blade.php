@@ -16,11 +16,13 @@
     <body>
         @include("navbar.navbar")
         
-        <div style="width:1000px; height:1000px; overflow: auto; " >
+        <div class="centralText" >
             <div align="justify">
                 
                     <br>
-                    <h1>Descripción general </h1>
+                    <div align="center">
+                        <h1>Descripción general </h1>
+                    </div>
                     <br>
                     El modelo de desarrollo global está contribuyendo a causar aumento en la contaminación ambiental. Hablar de contaminación ambiental corresponde a considerar agentes físicos, químicos o biológicos cuya  presencia en el ambiente puede resultar nocivos para la salud de las personas y/o repercutir negativamente en el medio ambiente. 
                     Mundialmente se focaliza la atención en los siguientes problemas ambientales: 
@@ -51,6 +53,5 @@
            
             </div>
         </div>
-
     </body>
 </html>

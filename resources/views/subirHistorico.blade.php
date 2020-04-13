@@ -88,7 +88,7 @@
 
         <input type="file" name="file">
 
-        <button>Importar Excel - Químicos del Río</button>
+        <button>Importar Excel - Parámetros Fisicoquímicos</button>
     </form>
 
     <form action="{{ route('import.infoRio') }}" method="post" enctype="multipart/form-data">
@@ -100,7 +100,7 @@
 
         <input type="file" name="file">
 
-        <button>Importar Excel - Información del Río</button>
+        <button>Importar Excel - Estación de Monitoreo</button>
     </form>
 
 </body>

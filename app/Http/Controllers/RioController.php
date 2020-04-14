@@ -109,8 +109,35 @@ class RioController extends Controller
 
     public function verPrediccion(Request $request)
     {
+
         dd("Wena men");
 
+    }
+
+    public function guardarHistorial(Request $request)
+    {
+
+        $idPuntoRio = request()->idPuntoRio;
+        $fechaRio = request()->fechaRio;
+
+        $hoy = getdate();
+
+        $dia = $hoy['mday'];
+        $mes = $hoy['mon'];
+        $año = $hoy['year'];
+        
+        $fechaActual = $dia . "/" . $mes . "/" . $año;
+
+        DB::table('tabla_historial')->insert([
+
+            'fechaActual'  => $fechaActual,
+            'idPuntoRio'   => $idPuntoRio,
+            'fechaRio'     => $fechaRio
+
+        ]);
+        
+
+    
     }
 
 

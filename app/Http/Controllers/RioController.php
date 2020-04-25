@@ -107,6 +107,46 @@ class RioController extends Controller
 
     }
 
+    public function calcularReglasConsumoHumano()
+    {
+
+        $arsenico = 0;
+        $boro = 0;
+        $cobalto = 0;
+        $cloro = 0;
+        $cobre = 0;
+        $cromo = 0;
+        $ph = 0;
+        $plomo = 0;
+        $zinc = 0;
+        $conducElectric = 0;
+
+        if($arsenico >= 0.2 || $boro >= 0.75 || $cobalto >= 0.05 || $cloro >= 400 || $cobre >= 2 || $cromo >= 0.05 || $ph >= 9 || $plomo >= 0.05 || $zinc >= 3 || $conducElectric >= 3000){
+
+            dd("No Apta");
+
+        }else{
+            if($arsenico >= 0.02 || $boro >= 0.5 || $cobalto >= 0.02 || $cloro >= 250 || $cobre >= 1.25 || $cromo >= 0.03 || $ph >= 8.4 || $plomo >= 0.03 || $zinc >= 2 || $conducElectric >= 1500){
+
+                dd("Calidad Baja");
+
+            }else{
+                if($arsenico >= 0.01 || $boro >= 0.25 || $cobalto >= 0.01 || $cloro >= 100 || $cobre >= 0.5 || $cromo >= 0.01 || $ph >= 7 || $plomo >= 0.01 || $zinc >= 1 || $conducElectric >= 750){
+
+                    dd("Calidad Neutra");
+
+                }else{
+
+                    dd("Calidad Alta");
+
+                }
+            }
+
+        }
+
+
+    }
+
     public function verPrediccion(Request $request)
     {
 

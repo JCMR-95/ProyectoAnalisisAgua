@@ -5,14 +5,19 @@ namespace App\Imports;
 use App\Excel;
 use Maatwebsite\Excel\Concerns\ToModel;
 use App\TablaInfoRio;
+use Maatwebsite\Excel\Concerns\WithStartRow;
 
-class ExcelImportInfo implements ToModel
+class ExcelImportInfo implements ToModel, WithStartRow
 {
     /**
     * @param array $row
     *
     * @return \Illuminate\Database\Eloquent\Model|null
     */
+    public function startRow(): int
+    {
+        return 2;
+    }
     public function model(array $row)
     {
         return new TablaInfoRio([

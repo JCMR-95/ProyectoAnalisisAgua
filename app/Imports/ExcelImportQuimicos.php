@@ -24,7 +24,7 @@ class ExcelImportQuimicos implements ToModel, WithStartRow
         return new TablaQuimicosRio([
 
             'idPuntoRio' => $row[0],
-            'fecha' => $row[1],
+            'fecha' => \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row[1]),
             'arsenico' => $row[2],
             'boro' => $row[3],
             'cloro' => $row[4],

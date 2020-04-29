@@ -40,36 +40,7 @@
         <div class="col-md-3">
             <div class="form-group">
                 <button type="submit" class="btn btn-primary">
-                    {{ __('Ver Toda la Información') }}
-                </button>
-            </div>
-        </div>
-        </div>
-
-    </form>
-
-    <form method="POST" action="{{ route('verDetallesEspecificos') }}" enctype="multipart/form-data" id="form-id">
-        {{ csrf_field() }}
-
-
-        <select id="sector"
-                name="sector"
-                class="form-control"
-                required>
-
-            <option value="001">Junta Río Salado</option>
-            <option value="002">Angostura (CA)</option>
-            <option value="003">Sifón Ayquina</option>
-            <option value="004">Pozo Chiu Chiu</option>
-            <option value="005">Yalquincha</option>
-            <option value="006">Escorial</option>
-            <option value="007">Finca</option>
-        </select>
-
-        <div class="col-md-3">
-            <div class="form-group">
-                <button type="submit" class="btn btn-primary">
-                    {{ __('Ver Información Importante') }}
+                    {{ __('Ver Información') }}
                 </button>
             </div>
         </div>

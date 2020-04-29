@@ -25,7 +25,8 @@ class RioController extends Controller
         plomo,
         zinc,
         consumo,
-        bico3
+        bico3,
+        calidadHumana
 
         from tabla_quimicos_rios 
         
@@ -48,102 +49,84 @@ class RioController extends Controller
         from tabla_info_rios
         
         where idPuntoRio = :sector', ['sector' => $sector]);
+        
+
+        //Hacer en una función aparte
+
+        $cantidadDatos = \DB::table('tabla_quimicos_rios')->where('idPuntoRio', $sector)
+        ->count();
+
+        for ($i = 0; $i <= $cantidadDatos-1; $i++) {
+            
+            $fecha = $datosQuimicos[$i]->fecha;
+            $arsenico = $datosQuimicos[$i]->arsenico;
+            $boro = $datosQuimicos[$i]->boro;
+            $cobalto = $datosQuimicos[$i]->cobalto;
+            $cloro = $datosQuimicos[$i]->cloro;
+            $cobre = $datosQuimicos[$i]->cobre;
+            $cromo = $datosQuimicos[$i]->cromo;
+            $ph = $datosQuimicos[$i]->ph;
+            $plomo = $datosQuimicos[$i]->plomo;
+            $zinc = $datosQuimicos[$i]->zinc;
+            $conducElectric = $datosQuimicos[$i]->consumo;
+
+            if($arsenico >= 0.2 || $boro >= 0.75 || $cobalto >= 0.05 || $cloro >= 400 || $cobre >= 2 || $cromo >= 0.05 || $ph >= 9 || $plomo >= 0.05 || $zinc >= 3 || $conducElectric >= 3000){
+
+                DB::table('tabla_quimicos_rios')
+                ->where('fecha', $fecha)
+                ->update(['calidadHumana' => "No Apta"]);
+
+            }else{
+                if($arsenico >= 0.02 || $boro >= 0.5 || $cobalto >= 0.02 || $cloro >= 250 || $cobre >= 1.25 || $cromo >= 0.03 || $ph >= 8.4 || $plomo >= 0.03 || $zinc >= 2 || $conducElectric >= 1500){
+
+                    DB::table('tabla_quimicos_rios')
+                    ->where('fecha', $fecha)
+                    ->update(['calidadHumana' => "Calidad Baja"]);
+
+                }else{
+                    if($arsenico >= 0.01 || $boro >= 0.25 || $cobalto >= 0.01 || $cloro >= 100 || $cobre >= 0.5 || $cromo >= 0.01 || $ph >= 7 || $plomo >= 0.01 || $zinc >= 1 || $conducElectric >= 750){
+
+                        DB::table('tabla_quimicos_rios')
+                        ->where('fecha', $fecha)
+                        ->update(['calidadHumana' => "Calidad Neutra"]);
+
+                    }else{
+
+                        DB::table('tabla_quimicos_rios')
+                        ->where('fecha', $fecha)
+                        ->update(['calidadHumana' => "Calidad Alta"]);
+
+                    }
+                }
+
+            }
+
+        }
 
         
         return view('DetallesRio',compact('datosQuimicos', 'datosInfo'));
 
     }
 
-    public function verDetallesEspecificos(Request $request)
-    {
-        
-        $sector = request()->sector;
-
-        $datosQuimicos = DB::select('select 
-
-        fecha,
-        arsenico,
-        boro,
-        cloro,
-        cobalto,
-        cobre,
-        cromo,
-        ph,
-        plomo,
-        zinc,
-        consumo,
-        bico3
-
-        from tabla_quimicos_rios 
-        
-        where idPuntoRio = :sector', ['sector' => $sector]);
-
-
-        $datosInfo = DB::select('select 
-        idPuntoRio,
-        nombreEstacion,
-        codBNA, 
-        altitud,
-        cuenca,
-        latitud,
-        longitud,
-        utmNorte,
-        unidadNorteUTM,
-        utmEste,
-        unidadEsteUTM
-
-        from tabla_info_rios
-        
-        where idPuntoRio = :sector', ['sector' => $sector]);
-
-        return view('DetallesEspecificosRio',compact('datosQuimicos', 'datosInfo'));
-
-    }
-
-    public function calcularReglasConsumoHumano()
-    {
-
-        $arsenico = 0;
-        $boro = 0;
-        $cobalto = 0;
-        $cloro = 0;
-        $cobre = 0;
-        $cromo = 0;
-        $ph = 0;
-        $plomo = 0;
-        $zinc = 0;
-        $conducElectric = 0;
-
-        if($arsenico >= 0.2 || $boro >= 0.75 || $cobalto >= 0.05 || $cloro >= 400 || $cobre >= 2 || $cromo >= 0.05 || $ph >= 9 || $plomo >= 0.05 || $zinc >= 3 || $conducElectric >= 3000){
-
-            dd("No Apta");
-
-        }else{
-            if($arsenico >= 0.02 || $boro >= 0.5 || $cobalto >= 0.02 || $cloro >= 250 || $cobre >= 1.25 || $cromo >= 0.03 || $ph >= 8.4 || $plomo >= 0.03 || $zinc >= 2 || $conducElectric >= 1500){
-
-                dd("Calidad Baja");
-
-            }else{
-                if($arsenico >= 0.01 || $boro >= 0.25 || $cobalto >= 0.01 || $cloro >= 100 || $cobre >= 0.5 || $cromo >= 0.01 || $ph >= 7 || $plomo >= 0.01 || $zinc >= 1 || $conducElectric >= 750){
-
-                    dd("Calidad Neutra");
-
-                }else{
-
-                    dd("Calidad Alta");
-
-                }
-            }
-
-        }
-
-
-    }
 
     public function verPrediccion(Request $request)
     {
 
-        dd("Wena men");
+        $sector = $request->sector;
+        $fecha = $request->fecha;
+        $arsenico = $request->arsenico;
+        $boro = $request->boro;
+        $cloro = $request->cloro;
+        $cobalto = $request->cobalto;
+        $cobre = $request->cobre;
+        $cromo = $request->cromo;
+        $ph = $request->ph;
+        $plomo = $request->plomo;
+        $zinc = $request->zinc;
+        $condElectric = $request->condElectric;
+        $bico3 = $request->bico3;
+
+        //Continuar mañana
 
     }
 

@@ -33,6 +33,7 @@ class TablaQuimicosRios extends Migration
             $table->string('zinc')->nullable();
             $table->string('consumo')->nullable();
             $table->string('bico3')->nullable();
+            $table->string('calidadHumana')->nullable();
         });
 
     }

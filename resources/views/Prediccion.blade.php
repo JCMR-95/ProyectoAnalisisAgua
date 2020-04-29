@@ -16,6 +16,14 @@
 <div class="tituloRio" align="center">
     <h1>Ver predicción</h1>
 </div>
+
+@if ($message = Session::get('exito'))
+    <div class="alert alert-success">
+        <button type="button" class="close" data-dismiss="alert">×</button>
+        <strong>{{ $message }}</strong>
+    </div>
+@endif
+
 <div class="page-content">
     <form method="POST" action="{{ route('verPrediccion') }}" enctype="multipart/form-data" id="form-id">
         {{ csrf_field() }}
@@ -38,75 +46,75 @@
             </div>
         </div>
         <div class="form-group justify-content-center row">
-            <label for="fecha" class="col-sm-2 col-form-label">Ingrese Fecha</label>
+            <label for="fecha" class="col-sm-2 col-form-label">Ingrese Fecha (Formato DD/MM/YYYY)</label>
             <div class="col-sm-4">
-                <input type="text" id="fecha" class="form-control">
+                <input type="text" id="fecha" name="fecha" class="form-control">
             </div>
         </div>
         <div class="form-group justify-content-center row">
             <label for="arsenico" class="col-sm-2 col-form-label">Ingrese la cantidad de Arsénico</label>
             <div class="col-sm-4">
-                <input type="text" id="arsenico" class="form-control">
+                <input type="text" id="arsenico" name="arsenico" class="form-control">
             </div>
         </div>
         <div class="form-group justify-content-center row">
             <label for="boro" class="col-sm-2 col-form-label">Ingrese la cantidad de Boro</label>
             <div class="col-sm-4">
-                <input type="text" id="boro" class="form-control">
+                <input type="text" id="boro" name="boro" class="form-control">
             </div>
         </div>
         <div class="form-group justify-content-center row">
             <label for="cloro" class="col-sm-2 col-form-label">Ingrese la cantidad de Cloro</label>
             <div class="col-sm-4">
-                <input type="text" id="cloro" class="form-control">
+                <input type="text" id="cloro" name="cloro" class="form-control">
             </div>
         </div>
         <div class="form-group justify-content-center row">
             <label for="cobalto" class="col-sm-2 col-form-label">Ingrese la cantidad de Cobalto</label>
             <div class="col-sm-4">
-                <input type="text" id="cobalto" class="form-control">
+                <input type="text" id="cobalto" name="cobalto" class="form-control">
             </div>
         </div>
         <div class="form-group justify-content-center row">
             <label for="cobre" class="col-sm-2 col-form-label">Ingrese la cantidad de Cobre</label>
             <div class="col-sm-4">
-                <input type="text" id="cobre" class="form-control">
+                <input type="text" id="cobre" name="cobre" class="form-control">
             </div>
         </div>
         <div class="form-group justify-content-center row">
             <label for="cromo" class="col-sm-2 col-form-label">Ingrese la cantidad de Cromo</label>
             <div class="col-sm-4">
-                <input type="text" id="cromo" class="form-control">
+                <input type="text" id="cromo" name="cromo" class="form-control">
             </div>
         </div>
         <div class="form-group justify-content-center row">
             <label for="ph" class="col-sm-2 col-form-label">Ingrese la cantidad de PH</label>
             <div class="col-sm-4">
-                <input type="text" id="ph" class="form-control">
+                <input type="text" id="ph" name="ph" class="form-control">
             </div>
         </div>
         <div class="form-group justify-content-center row">
             <label for="plomo" class="col-sm-2 col-form-label">Ingrese la cantidad de Plomo</label>
             <div class="col-sm-4">
-                <input type="text" id="plomo" class="form-control">
+                <input type="text" id="plomo" name="plomo" class="form-control">
             </div>
         </div>
         <div class="form-group justify-content-center row">
             <label for="zinc" class="col-sm-2 col-form-label">Ingrese la cantidad de Zinc</label>
             <div class="col-sm-4">
-                <input type="text" id="zinc" class="form-control">
+                <input type="text" id="zinc" name="zinc" class="form-control">
             </div>
         </div>
         <div class="form-group justify-content-center row">
             <label for="condElectric" class="col-sm-2 col-form-label">Ingrese la cantidad de Conductividad Eléctrica</label>
             <div class="col-sm-4">
-                <input type="text" id="condElectric" class="form-control">
+                <input type="text" id="condElectric" name="condElectric" class="form-control">
             </div>
         </div>
         <div class="form-group justify-content-center row">
             <label for="bico3" class="col-sm-2 col-form-label">Ingrese la cantidad de BiCO3</label>
             <div class="col-sm-4">
-                <input type="text" id="bico3" class="form-control">
+                <input type="text" id="bico3" name="bico3" class="form-control">
             </div>
         </div>
         

@@ -123,10 +123,62 @@ class RioController extends Controller
         $ph = $request->ph;
         $plomo = $request->plomo;
         $zinc = $request->zinc;
-        $condElectric = $request->condElectric;
+        $conducElectric = $request->condElectric;
         $bico3 = $request->bico3;
+        $calidadHumana = null;
 
-        //Continuar mañana
+        if($arsenico >= 0.2 || $boro >= 0.75 || $cobalto >= 0.05 || $cloro >= 400 || $cobre >= 2 || $cromo >= 0.05 || $ph >= 9 || $plomo >= 0.05 || $zinc >= 3 || $conducElectric >= 3000){
+
+            $calidadHumana = "No Apta";
+
+        }else{
+            if($arsenico >= 0.02 || $boro >= 0.5 || $cobalto >= 0.02 || $cloro >= 250 || $cobre >= 1.25 || $cromo >= 0.03 || $ph >= 8.4 || $plomo >= 0.03 || $zinc >= 2 || $conducElectric >= 1500){
+
+                $calidadHumana = "Calidad Baja";
+
+            }else{
+                if($arsenico >= 0.01 || $boro >= 0.25 || $cobalto >= 0.01 || $cloro >= 100 || $cobre >= 0.5 || $cromo >= 0.01 || $ph >= 7 || $plomo >= 0.01 || $zinc >= 1 || $conducElectric >= 750){
+
+                    $calidadHumana = "Calidad Neutra";
+
+                }else{
+
+                    $calidadHumana = "Calidad Alta";
+
+                }
+            }
+
+        }
+
+        DB::table('tabla_quimicos_rios')->insert(
+            ['idPuntoRio' => $sector, 
+            'fecha' => $fecha,
+            'arsenico' => $arsenico,
+            'boro' => $boro,
+            'cloro' => $cloro,
+            'cobalto' => $cobalto,
+            'cobre' => $cobre,
+            'cromo' => $cromo,
+            'ph' => $ph,
+            'plomo' => $plomo,
+            'zinc' => $zinc,
+            'consumo' => $conducElectric,
+            'bico3' => $bico3,
+            'calidadHumana' => $calidadHumana]
+        );
+
+        if($calidadHumana == "No Apta"){
+            return back()->with('exito','Resultado: No Apta');
+        }
+        if($calidadHumana == "Calidad Baja"){
+            return back()->with('exito','Resultado: Calidad Baja');
+        }
+        if($calidadHumana == "Calidad Neutra"){
+            return back()->with('exito','Resultado: Calidad Neutra');
+        }
+        if($calidadHumana == "Calidad Alta"){
+            return back()->with('exito','Resultado: Calidad Alta');
+        }
 
     }
 

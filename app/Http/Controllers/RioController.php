@@ -15,29 +15,17 @@ class RioController extends Controller
         $datosQuimicos = DB::select('select 
 
         fecha,
-        aluminio, unidadAluminio,
-        arsenico, unidadArsenico,
-        boro, unidadBoro,
-        cloro, unidadCloro,
-        cadmio, unidadCadmio,
-        calcio, unidadCalcio,
-        cobre, unidadCobre,
-        cromo, unidadCromo,
-        hierro, unidadHierro,
-        fosfato, unidadFosfato,
-        magnesio, unidadMagnesio,
-        manganeso, unidadManganeso,
-        molibdeno, unidadMolibdeno,
-        nitrato, unidadNitrato,
-        niquel, unidadNiquel,
-        oxigeno, unidadOxigeno,
-        ph, unidadPh,
-        plata, unidadPlata,
-        plomo, unidadPlomo,
-        potasio, unidadPotasio,
-        selenio, unidadSelenio,
-        sodio, unidadSodio,
-        zinc, unidadZinc
+        arsenico,
+        boro,
+        cloro,
+        cobalto,
+        cobre,
+        cromo,
+        ph,
+        plomo,
+        zinc,
+        consumo,
+        bico3
 
         from tabla_quimicos_rios 
         
@@ -74,12 +62,17 @@ class RioController extends Controller
         $datosQuimicos = DB::select('select 
 
         fecha,
-        arsenico, unidadArsenico,
-        boro, unidadBoro,
-        cobre, unidadCobre,
-        cromo, unidadCromo,
-        plomo, unidadPlomo,
-        zinc, unidadZinc
+        arsenico,
+        boro,
+        cloro,
+        cobalto,
+        cobre,
+        cromo,
+        ph,
+        plomo,
+        zinc,
+        consumo,
+        bico3
 
         from tabla_quimicos_rios 
         

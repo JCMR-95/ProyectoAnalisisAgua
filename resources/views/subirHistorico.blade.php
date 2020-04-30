@@ -13,66 +13,34 @@
 </head>
 <body>
     @include("navbar.navbar")
-    <h1>Información del Río Loa</h1>
+    
+    <div class="tituloRio" align="center">
+        <h1>Importar datos</h1>
 
-    <img src = "storage/Grafico.jpeg"/>
+        <form action="{{ route('import.quimicosRio') }}" method="post" enctype="multipart/form-data">
+            @csrf
 
-    <h3>Seleccione Zona y Elementos Químicos</h3>
+            @if(Session::has('message'))
+                <p>{{ Session::get('message') }}</p>
+            @endif
 
-    <form method="POST" action="{{ route('verDetalles') }}" enctype="multipart/form-data" id="form-id">
-        {{ csrf_field() }}
+            <input type="file" name="file">
 
+            <button>Importar Excel - Parámetros Fisicoquímicos</button>
+        </form>
 
-        <select id="sector"
-                name="sector"
-                class="form-control"
-                required>
+        <form action="{{ route('import.infoRio') }}" method="post" enctype="multipart/form-data">
+            @csrf
 
-            <option value="001">Junta Río Salado</option>
-            <option value="002">Angostura (CA)</option>
-            <option value="003">Sifón Ayquina</option>
-            <option value="004">Pozo Chiu Chiu</option>
-            <option value="005">Yalquincha</option>
-            <option value="006">Escorial</option>
-            <option value="007">Finca</option>
-        </select>
+            @if(Session::has('message'))
+                <p>{{ Session::get('message') }}</p>
+            @endif
 
-        <div class="col-md-3">
-            <div class="form-group">
-                <button type="submit" class="btn btn-primary">
-                    {{ __('Ver Información') }}
-                </button>
-            </div>
-        </div>
-        </div>
+            <input type="file" name="file">
 
-    </form>
-
-    <h1>Importar datos</h1>
-
-    <form action="{{ route('import.quimicosRio') }}" method="post" enctype="multipart/form-data">
-        @csrf
-
-        @if(Session::has('message'))
-            <p>{{ Session::get('message') }}</p>
-        @endif
-
-        <input type="file" name="file">
-
-        <button>Importar Excel - Parámetros Fisicoquímicos</button>
-    </form>
-
-    <form action="{{ route('import.infoRio') }}" method="post" enctype="multipart/form-data">
-        @csrf
-
-        @if(Session::has('message'))
-            <p>{{ Session::get('message') }}</p>
-        @endif
-
-        <input type="file" name="file">
-
-        <button>Importar Excel - Estación de Monitoreo</button>
-    </form>
+            <button>Importar Excel - Estación de Monitoreo</button>
+        </form>
+    </div>
 
 </body>
 </html>

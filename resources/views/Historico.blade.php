@@ -13,6 +13,45 @@
     </head>
     <body>
     @include("navbar.navbar")
+
+    <div class="tituloRio" align="center">
+        <h1>Información del Río Loa</h1>
+
+        <img src = "storage/Grafico.jpeg"/>
+
+    
+        <h3>Seleccione Zona</h3>
+    
+        <form method="POST" action="{{ route('verDetalles') }}" enctype="multipart/form-data" id="form-id">
+            {{ csrf_field() }}
+
+
+            <select id="sector"
+                    name="sector"
+                    class="ol-sm-2 col-form-label"
+                    required>
+
+                <option value="001">Junta Río Salado</option>
+                <option value="002">Angostura (CA)</option>
+                <option value="003">Sifón Ayquina</option>
+                <option value="004">Pozo Chiu Chiu</option>
+                <option value="005">Yalquincha</option>
+                <option value="006">Escorial</option>
+                <option value="007">Finca</option>
+            </select>
+
+            <div class="col-md-3">
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary">
+                        {{ __('Ver Información') }}
+                    </button>
+                </div>
+            </div>
+            </div>
+
+        </form>
+    </div>
+
         <div class="tituloRio" align="center">
             <h1>Ver sección del rio</h1>
         </div>

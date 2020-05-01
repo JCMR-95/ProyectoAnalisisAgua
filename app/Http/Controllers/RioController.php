@@ -4,9 +4,54 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use DB;
+use Session;
+use View;
 
 class RioController extends Controller
 {
+    public function validar(Request $request){
+        $reglas = [
+            'fecha' => 'required',
+            'arsenico' => 'required|regex:/^(\d*,)?\d+$/',
+            'boro' => 'required|regex:/^(\d*,)?\d+$/',
+            'cloro' => 'required|regex:/^(\d*,)?\d+$/',
+            'cobalto' => 'required|regex:/^(\d*,)?\d+$/',
+            'cromo' => 'required|regex:/^(\d*,)?\d+$/',
+            'cobre' => 'required|regex:/^(\d*,)?\d+$/',
+            'ph' => 'required|regex:/^(\d*,)?\d+$/',
+            'plomo' => 'required|regex:/^(\d*,)?\d+$/',
+            'zinc' => 'required|regex:/^(\d*,)?\d+$/',
+            'condElectric' => 'required|regex:/^(\d*,)?\d+$/',
+            'bico3' => 'required|regex:/^(\d*,)?\d+$/'
+        ];
+        $mensajes=[
+            'fecha.required' => 'Debe seleccionar una fecha valida.',
+            'arsenico.required' => 'Debe introducir una cantidad númerica.',
+            'boro.required' => 'Debe introducir una cantidad númerica.',
+            'cloro.required' => 'Debe introducir una cantidad númerica.',
+            'cobalto.required' => 'Debe introducir una cantidad númerica.',
+            'cromo.required' => 'Debe introducir una cantidad númerica.',
+            'cobre.required' => 'Debe introducir una cantidad númerica',
+            'ph.required' => 'Debe introducir una cantidad númerica.',
+            'plomo.required' => 'Debe introducir una cantidad númerica.',
+            'zinc.required' => 'Debe introducir una cantidad númerica.',
+            'condElectric.required' => 'Debe introducir una cantidad númerica.',
+            'bico3.required' => 'Debe introducir una cantidad númerica.',
+            'arsenico.regex' => 'Debe introducir una cantidad númerica.',
+            'boro.regex' => 'Debe introducir una cantidad númerica.',
+            'cloro.regex' => 'Debe introducir una cantidad númerica.',
+            'cobalto.regex' => 'Debe introducir una cantidad númerica.',
+            'cromo.regex' => 'Debe introducir una cantidad númerica.',
+            'cobre.regex' => 'Debe introducir una cantidad númerica',
+            'ph.regex' => 'Debe introducir una cantidad númerica.',
+            'plomo.regex' => 'Debe introducir una cantidad númerica.',
+            'zinc.regex' => 'Debe introducir una cantidad númerica.',
+            'condElectric.regex' => 'Debe introducir una cantidad númerica.',
+            'bico3.regex' => 'Debe introducir una cantidad númerica.'
+        ];
+
+        $this->validate($request, $reglas, $mensajes);
+    }
 
     public function verDetalles(Request $request)
     {
@@ -69,49 +114,18 @@ class RioController extends Controller
             $plomo = $datosQuimicos[$i]->plomo;
             $zinc = $datosQuimicos[$i]->zinc;
             $conducElectric = $datosQuimicos[$i]->consumo;
-
-            if($arsenico >= 0.2 || $boro >= 0.75 || $cobalto >= 0.05 || $cloro >= 400 || $cobre >= 2 || $cromo >= 0.05 || $ph >= 9 || $plomo >= 0.05 || $zinc >= 3 || $conducElectric >= 3000){
-
-                DB::table('tabla_quimicos_rios')
+            $calidadHumana = $this->calcularCalidad($arsenico, $boro, $cloro, $cobalto, $cobre, $cromo, $ph, $plomo, $zinc, $conducElectric);
+            DB::table('tabla_quimicos_rios')
                 ->where('fecha', $fecha)
-                ->update(['calidadHumana' => "No Apta"]);
-
-            }else{
-                if($arsenico >= 0.02 || $boro >= 0.5 || $cobalto >= 0.02 || $cloro >= 250 || $cobre >= 1.25 || $cromo >= 0.03 || $ph >= 8.4 || $plomo >= 0.03 || $zinc >= 2 || $conducElectric >= 1500){
-
-                    DB::table('tabla_quimicos_rios')
-                    ->where('fecha', $fecha)
-                    ->update(['calidadHumana' => "Calidad Baja"]);
-
-                }else{
-                    if($arsenico >= 0.01 || $boro >= 0.25 || $cobalto >= 0.01 || $cloro >= 100 || $cobre >= 0.5 || $cromo >= 0.01 || $ph >= 7 || $plomo >= 0.01 || $zinc >= 1 || $conducElectric >= 750){
-
-                        DB::table('tabla_quimicos_rios')
-                        ->where('fecha', $fecha)
-                        ->update(['calidadHumana' => "Calidad Neutra"]);
-
-                    }else{
-
-                        DB::table('tabla_quimicos_rios')
-                        ->where('fecha', $fecha)
-                        ->update(['calidadHumana' => "Calidad Alta"]);
-
-                    }
-                }
-
-            }
-
+                ->update(['calidadHumana' => $calidadHumana]);
         }
-
-        
         return view('DetallesRio',compact('datosQuimicos', 'datosInfo'));
-
     }
 
 
     public function verPrediccion(Request $request)
     {
-
+        self::validar($request);
         $sector = $request->sector;
         $fecha = $request->fecha;
         $arsenico = $request->arsenico;
@@ -125,32 +139,9 @@ class RioController extends Controller
         $zinc = $request->zinc;
         $conducElectric = $request->condElectric;
         $bico3 = $request->bico3;
-        $calidadHumana = null;
+        $calidadHumana = $this->calcularCalidad($arsenico, $boro, $cloro, $cobalto, $cobre, $cromo, $ph, $plomo, $zinc, $conducElectric);
 
-        if($arsenico >= 0.2 || $boro >= 0.75 || $cobalto >= 0.05 || $cloro >= 400 || $cobre >= 2 || $cromo >= 0.05 || $ph >= 9 || $plomo >= 0.05 || $zinc >= 3 || $conducElectric >= 3000){
-
-            $calidadHumana = "No Apta";
-
-        }else{
-            if($arsenico >= 0.02 || $boro >= 0.5 || $cobalto >= 0.02 || $cloro >= 250 || $cobre >= 1.25 || $cromo >= 0.03 || $ph >= 8.4 || $plomo >= 0.03 || $zinc >= 2 || $conducElectric >= 1500){
-
-                $calidadHumana = "Calidad Baja";
-
-            }else{
-                if($arsenico >= 0.01 || $boro >= 0.25 || $cobalto >= 0.01 || $cloro >= 100 || $cobre >= 0.5 || $cromo >= 0.01 || $ph >= 7 || $plomo >= 0.01 || $zinc >= 1 || $conducElectric >= 750){
-
-                    $calidadHumana = "Calidad Neutra";
-
-                }else{
-
-                    $calidadHumana = "Calidad Alta";
-
-                }
-            }
-
-        }
-
-        DB::table('tabla_quimicos_rios')->insert(
+        DB::table('tabla_prediccion_rio')->insert(
             ['idPuntoRio' => $sector, 
             'fecha' => $fecha,
             'arsenico' => $arsenico,
@@ -168,17 +159,19 @@ class RioController extends Controller
         );
 
         if($calidadHumana == "No Apta"){
-            return back()->with('exito','Resultado: No Apta');
+            Session::flash('noApto', 'Resultado: No Apta');
+        }else{
+            if($calidadHumana == "Calidad Baja"){
+                Session::flash('bajo', 'Resultado: Calidad Baja');
+            }else{
+                if($calidadHumana == "Calidad Neutra"){
+                    Session::flash('neutro', 'Resultado: Calidad Neutra');
+                }else{
+                    Session::flash('alto', 'Resultado: Calidad Alta');
+                }
+            }
         }
-        if($calidadHumana == "Calidad Baja"){
-            return back()->with('exito','Resultado: Calidad Baja');
-        }
-        if($calidadHumana == "Calidad Neutra"){
-            return back()->with('exito','Resultado: Calidad Neutra');
-        }
-        if($calidadHumana == "Calidad Alta"){
-            return back()->with('exito','Resultado: Calidad Alta');
-        }
+        return View::make('Mensajes');
 
     }
 
@@ -203,10 +196,26 @@ class RioController extends Controller
             'fechaRio'     => $fechaRio
 
         ]);
-        
-
-    
     }
 
+    public function calcularCalidad($arsenico, $boro, $cloro, $cobalto, $cobre, $cromo, $ph, $plomo, $zinc, $conducElectric){
+        if($arsenico >= 0.2 || $boro >= 0.75 || $cobalto >= 0.05 || $cloro >= 400 || $cobre >= 2 || $cromo >= 0.05 || $ph >= 9 || $plomo >= 0.05 || $zinc >= 3 || $conducElectric >= 3000){
+
+            $calidadHumana = "No Apta";
+        }else{
+            if($arsenico >= 0.02 || $boro >= 0.5 || $cobalto >= 0.02 || $cloro >= 250 || $cobre >= 1.25 || $cromo >= 0.03 || $ph >= 8.4 || $plomo >= 0.03 || $zinc >= 2 || $conducElectric >= 1500){
+
+                $calidadHumana = "Calidad Baja";
+            }else{
+                if($arsenico >= 0.01 || $boro >= 0.25 || $cobalto >= 0.01 || $cloro >= 100 || $cobre >= 0.5 || $cromo >= 0.01 || $ph >= 7 || $plomo >= 0.01 || $zinc >= 1 || $conducElectric >= 750){
+                    $calidadHumana = "Calidad Neutra";
+                }else{
+                    $calidadHumana = "Calidad Alta";
+
+                }
+            }
+        }
+        return $calidadHumana;
+    }
 
 }

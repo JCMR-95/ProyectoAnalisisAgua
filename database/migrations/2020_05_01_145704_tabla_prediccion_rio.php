@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class TablaQuimicosRios extends Migration
+class TablaPrediccionRio extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,12 @@ class TablaQuimicosRios extends Migration
      */
     public function up()
     {
-        
-        Schema::create('tabla_quimicos_rios', function (Blueprint $table) {
+        Schema::create('tabla_prediccion_rio', function (Blueprint $table) {
 
             $table->bigIncrements('id');
             $table->timestamps();
-			
-			$table->string('idPuntoRio')->nullable();
+
+            $table->string('idPuntoRio')->nullable();
             $table->string('fecha')->nullable();
 
             $table->string('arsenico')->nullable();
@@ -35,7 +34,6 @@ class TablaQuimicosRios extends Migration
             $table->string('bico3')->nullable();
             $table->string('calidadHumana')->nullable();
         });
-
     }
 
     /**

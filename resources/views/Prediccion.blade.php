@@ -133,6 +133,9 @@
         </div>
     </form>
 </div>
+<button type="submit" class="btn btn-primary">
+                        <a href=" {{route('exportarPredicciones')}} " class="btn btn-primary"> Exportar Excel </a>
+</button>
 </body>
 </html>
 

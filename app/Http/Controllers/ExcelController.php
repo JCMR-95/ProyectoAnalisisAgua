@@ -8,6 +8,9 @@ use Maatwebsite\Excel\Facades\Excel;
 use App\Imports\ExcelImportQuimicos;
 use App\Imports\ExcelImportInfo;
 
+use Maatwebsite\Excel\Concerns\FromCollection;
+use App\Exports\ExcelExport;
+use App\Exports\HistoricoExport;
 
 
 class ExcelController extends Controller
@@ -29,6 +32,16 @@ class ExcelController extends Controller
         Excel::import(new ExcelImportInfo, $file);
 
         return back()->with('message', 'Importanción completada');
+    }
+
+    public function exportarHistorico()
+    {
+        return Excel::download(new HistoricoExport, 'Historico.xlsx');
+    }
+
+    public function exportarPredicciones()
+    {
+        return Excel::download(new PrediccionesExport, 'Predicciones.xlsx');
     }
 
 }

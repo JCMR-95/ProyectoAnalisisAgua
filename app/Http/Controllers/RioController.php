@@ -159,15 +159,15 @@ class RioController extends Controller
         );
 
         if($calidadHumana == "No Apta"){
-            Session::flash('noApto', 'Resultado: No Apta');
+            Session::flash('noApto', 'Resultado: No Apta. Existen uno o más elementos que están sobre el límite permitido para el consumo humano y uso de riego, por lo tanto no se puede usar.');
         }else{
             if($calidadHumana == "Calidad Baja"){
-                Session::flash('bajo', 'Resultado: Calidad Baja');
+                Session::flash('bajo', 'Resultado: Calidad Baja.');
             }else{
                 if($calidadHumana == "Calidad Neutra"){
-                    Session::flash('neutro', 'Resultado: Calidad Neutra');
+                    Session::flash('neutro', 'Resultado: Calidad Neutra.');
                 }else{
-                    Session::flash('alto', 'Resultado: Calidad Alta');
+                    Session::flash('alto', 'Resultado: Calidad Alta.');
                 }
             }
         }
@@ -216,6 +216,12 @@ class RioController extends Controller
             }
         }
         return $calidadHumana;
+    }
+
+    public function getFechas(Request $request){
+        $sector = request()->sector;
+        $fechas = \DB::table('tabla_quimicos_rios')->where('idPuntoRio', $sector)->pluck('fecha');
+        return $fechas;
     }
 
 }

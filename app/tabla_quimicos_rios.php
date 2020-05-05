@@ -20,7 +20,8 @@ class tabla_quimicos_rios extends Model
         'zinc',
         'consumo',
         'bico3',
-        'calidadHumana'
+        'calidadHumana',
+        'calidadRiego'
     ];
 
 }

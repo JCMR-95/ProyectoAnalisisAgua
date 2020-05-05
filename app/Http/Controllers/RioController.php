@@ -71,7 +71,8 @@ class RioController extends Controller
         zinc,
         consumo,
         bico3,
-        calidadHumana
+        calidadHumana,
+        calidadRiego
 
         from tabla_quimicos_rios 
         
@@ -114,10 +115,15 @@ class RioController extends Controller
             $plomo = $datosQuimicos[$i]->plomo;
             $zinc = $datosQuimicos[$i]->zinc;
             $conducElectric = $datosQuimicos[$i]->consumo;
-            $calidadHumana = $this->calcularCalidad($arsenico, $boro, $cloro, $cobalto, $cobre, $cromo, $ph, $plomo, $zinc, $conducElectric);
+            $calidadHumana = $this->calcularCalidadHumana($arsenico, $boro, $cloro, $cobalto, $cobre, $cromo, $ph, $plomo, $zinc, $conducElectric);
+            $calidadRiego = $this->calcularCalidadRiego($arsenico, $boro, $cloro, $cobalto, $cobre, $cromo, $ph, $plomo, $zinc, $conducElectric);
             DB::table('tabla_quimicos_rios')
                 ->where('fecha', $fecha)
                 ->update(['calidadHumana' => $calidadHumana]);
+
+                DB::table('tabla_quimicos_rios')
+                ->where('fecha', $fecha)
+                ->update(['calidadRiego' => $calidadRiego]);
         }
         return view('DetallesRio',compact('datosQuimicos', 'datosInfo'));
     }
@@ -139,7 +145,8 @@ class RioController extends Controller
         $zinc = $request->zinc;
         $conducElectric = $request->condElectric;
         $bico3 = $request->bico3;
-        $calidadHumana = $this->calcularCalidad($arsenico, $boro, $cloro, $cobalto, $cobre, $cromo, $ph, $plomo, $zinc, $conducElectric);
+        $calidadHumana = $this->calcularCalidadHumana($arsenico, $boro, $cloro, $cobalto, $cobre, $cromo, $ph, $plomo, $zinc, $conducElectric);
+        $calidadRiego = $this->calcularCalidadRiego($arsenico, $boro, $cloro, $cobalto, $cobre, $cromo, $ph, $plomo, $zinc, $conducElectric);
 
         DB::table('tabla_prediccion_rio')->insert(
             ['idPuntoRio' => $sector, 
@@ -155,7 +162,8 @@ class RioController extends Controller
             'zinc' => $zinc,
             'consumo' => $conducElectric,
             'bico3' => $bico3,
-            'calidadHumana' => $calidadHumana]
+            'calidadHumana' => $calidadHumana,
+            'calidadRiego' => $calidadRiego]
         );
 
         if($calidadHumana == "No Apta"){
@@ -198,7 +206,7 @@ class RioController extends Controller
         ]);
     }
 
-    public function calcularCalidad($arsenico, $boro, $cloro, $cobalto, $cobre, $cromo, $ph, $plomo, $zinc, $conducElectric){
+    public function calcularCalidadHumana($arsenico, $boro, $cloro, $cobalto, $cobre, $cromo, $ph, $plomo, $zinc, $conducElectric){
         if($arsenico >= 0.2 || $boro >= 0.75 || $cobalto >= 0.05 || $cloro >= 400 || $cobre >= 2 || $cromo >= 0.05 || $ph >= 9 || $plomo >= 0.05 || $zinc >= 3 || $conducElectric >= 3000){
 
             $calidadHumana = "No Apta";
@@ -216,6 +224,20 @@ class RioController extends Controller
             }
         }
         return $calidadHumana;
+    }
+
+    public function calcularCalidadRiego($arsenico, $boro, $cloro, $cobalto, $cobre, $cromo, $ph, $plomo, $zinc, $conducElectric){
+
+        if($arsenico >= 0.2 || $boro >= 0.75 || $cobalto >= 0.05 || $cloro < 180 || $cobre >= 0.2 || $cromo >= 0.1 || $ph >= 9 || $plomo >= 0.5 || $zinc >= 2 || $conducElectric >= 3000){
+
+            $calidadRiego = "No Apta";
+
+        }else{
+            
+            $calidadRiego = "Calidad Baja";
+
+        }
+        return $calidadRiego;
     }
 
     public function getFechas(Request $request){

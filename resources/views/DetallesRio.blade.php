@@ -67,7 +67,8 @@
                 <th scope="col">Zinc</th>
                 <th scope="col">Conductividad Eléctrica</th>
                 <th scope="col">BiCO3</th>
-                <th scope="col">Calidad Humana</th>
+                <th scope="col">Calidad de Consumo Humano</th>
+                <th scope="col">Calidad de Riego</th>
             </tr>
         </thead>
         <tbody id="myTable">
@@ -87,6 +88,7 @@
                     <td scope="row">{!! $datoQuimicos->consumo !!}</td>
                     <td scope="row">{!! $datoQuimicos->bico3 !!}</td>
                     <td scope="row">{!! $datoQuimicos->calidadHumana !!}</td>
+                    <td scope="row">{!! $datoQuimicos->calidadRiego !!}</td>
                 
                 </tr>
             

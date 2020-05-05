@@ -34,6 +34,7 @@ class TablaQuimicosRios extends Migration
             $table->string('consumo')->nullable();
             $table->string('bico3')->nullable();
             $table->string('calidadHumana')->nullable();
+            $table->string('calidadRiego')->nullable();
         });
 
     }

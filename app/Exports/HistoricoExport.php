@@ -36,7 +36,8 @@ class HistoricoExport implements FromCollection, WithHeadings
             'Zinc',
             'Conductividad Eléctrica',
             'BiCO3',
-            'Calidad de Consumo Humano'
+            'Calidad de Consumo Humano',
+            'Calidad de Riego'
         ];
     }
 }

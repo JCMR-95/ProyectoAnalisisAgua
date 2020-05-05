@@ -54,17 +54,17 @@
             <h1>Ver sección del rio</h1>
         </div>
         <div class="page-content">
-            <form method="POST" action="{{ route('verDetalles') }}" enctype="multipart/form-data" id="form-id">
+            <form method="POST" action="{{ route('verEstado') }}" enctype="multipart/form-data" id="form-id-detalle">
                 {{ csrf_field() }}
                 <div class="form-group justify-content-center row">
-                    <label for="sector" class="col-sm-2 col-form-label">Sección del río Loa</label>
+                    <label for="idPuntoRio" class="col-sm-2 col-form-label">Sección del río Loa</label>
                     <div class="col-sm-4">
-                        <select id="sector"
+                        <select id="idPuntoRio"
                                 name="sector"
-                                class="form-control"
+                                class="form-control sector"
                                 data-dependent="fecha"
                                 required>
-
+                            <option value ="">Seleccione una sección del río</option>
                             <option value="001">Junta Río Salado</option>
                             <option value="002">Angostura (CA)</option>
                             <option value="003">Sifón Ayquina</option>
@@ -78,13 +78,13 @@
                 <div class="form-group justify-content-center row">
                     <label for="fecha" class="col-sm-2 col-form-label">Fecha de la medición</label>
                     <div class="col-sm-4">
-                        <select id="fecha" class="form-control">
-                            <option value="000">Ingrese una zona del río</option>
+                        <select id="fecha" name="fecha" class="form-control">
+                            <option value="">Seleccione una fecha</option>
                         </select>
                     </div>
                 </div>
                 <div class="form-group justify-content-center row">
-                    <button type="submit" class="btn btn-primary">
+                    <button type="submit" class="btn btn-primary details">
                         {{ __('Ver Información') }}
                     </button>
                 </div>
@@ -95,25 +95,51 @@
         </button>
     </body>
 </html>
-<!--<script>
+<script>
     $(document).ready(function(){
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
         $('.sector').change(function(){
            if($(this).val() != ''){
+               var select = $(this).attr("id");
                var value = $(this).val();
+               var dependent = $(this).data('dependent');
+               var _token = $('input[name="_token"]').val();
                $.ajax({
-                   url:"GetFechas",
-                   method:"post",
-                   data:value,
+                   url:'GetFechas',
+                   method:'POST',
+                   data:{select:select, value:value, _token:_token, dependent:dependent},
                    success:function(result)
                    {
                        $('#'+dependent).html(result);
                    }
-
                })
            }
         });
         $('#sector').change(function(){
             $('#fecha').val('');
         });
+        $('.details').click(function(e){
+            e.preventDefault();
+            let myForm = document.getElementById('form-id-detalle');
+            let formData = new FormData(myForm);
+            $.ajax({
+                type: 'POST',
+                url: 'GetEstado',
+                data: formData,
+                success: function (data) {
+                    //$('#error').html("");
+                    $('html, body').animate({scrollTop: 0}, 0);
+                    //$('div.flash-message').html(data);
+                    document.getElementById("form-id-detalle").reset();
+                },
+                processData: false,
+                contentType: false,
+            })
+        })
     })
-</script>-->
+
+</script>

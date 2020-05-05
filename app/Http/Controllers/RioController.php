@@ -241,9 +241,25 @@ class RioController extends Controller
     }
 
     public function getFechas(Request $request){
-        $sector = request()->sector;
-        $fechas = \DB::table('tabla_quimicos_rios')->where('idPuntoRio', $sector)->pluck('fecha');
-        return $fechas;
+        $select = $request->get('select');
+        $value = $request->get('value');
+        $dependent = $request->get('dependent');
+        $data = DB::table('tabla_quimicos_rios')->where($select, $value)->get();
+        $output = '<option value="">Select '.ucfirst($dependent).'</option>';
+        foreach($data as $row)
+        {
+            $output .= '<option value="'.$row->$dependent.'">'.$row->$dependent.'</option>';
+        }
+        echo $output;
+    }
+
+    public function getEstado(Request $request){
+        $sector = $request->idPuntoRio;
+        $fecha = $request->fecha;
+        $data = DB::table('tabla_quimicos_rios')->where('fecha', $fecha)->get();
+        foreach($data as $datas){
+            dd($datas);
+        }
     }
 
 }

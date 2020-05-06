@@ -165,7 +165,11 @@ class RioController extends Controller
             'calidadHumana' => $calidadHumana,
             'calidadRiego' => $calidadRiego]
         );
+        $this->checkCalidad($calidadHumana);
+        return View::make('Mensajes');
 
+    }
+    public function checkCalidad($calidadHumana){
         if($calidadHumana == "No Apta"){
             Session::flash('noApto', 'Resultado: No Apta. Existen uno o más elementos que están sobre el límite permitido para el consumo humano y uso de riego, por lo tanto no se puede usar.');
         }else{
@@ -179,8 +183,6 @@ class RioController extends Controller
                 }
             }
         }
-        return View::make('Mensajes');
-
     }
 
     public function guardarHistorial(Request $request)
@@ -245,7 +247,7 @@ class RioController extends Controller
         $value = $request->get('value');
         $dependent = $request->get('dependent');
         $data = DB::table('tabla_quimicos_rios')->where($select, $value)->get();
-        $output = '<option value="">Select '.ucfirst($dependent).'</option>';
+        $output = '<option value="">Seleccione una '.$dependent.'</option>';
         foreach($data as $row)
         {
             $output .= '<option value="'.$row->$dependent.'">'.$row->$dependent.'</option>';
@@ -254,12 +256,11 @@ class RioController extends Controller
     }
 
     public function getEstado(Request $request){
-        $sector = $request->idPuntoRio;
+        $sector = $request->sector;
         $fecha = $request->fecha;
-        $data = DB::table('tabla_quimicos_rios')->where('fecha', $fecha)->get();
-        foreach($data as $datas){
-            dd($datas);
-        }
+        $data = DB::table('tabla_quimicos_rios')->where(['idPuntoRio' => $sector, 'fecha' => $fecha])->first();
+        $this->checkCalidad($data->calidadHumana);
+        return View::make('Mensajes');
     }
 
 }

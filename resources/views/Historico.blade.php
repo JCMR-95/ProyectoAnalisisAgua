@@ -93,6 +93,7 @@
         <button type="submit" class="btn btn-primary">
             <a href=" {{route('exportarHistorico')}} " class="btn btn-primary"> Exportar Excel </a>
         </button>
+        <div class="flash-message"></div>
     </body>
 </html>
 <script>
@@ -119,10 +120,11 @@
                })
            }
         });
-        $('#sector').change(function(){
+        $('#idPuntoRio').change(function(){
             $('#fecha').val('');
         });
         $('.details').click(function(e){
+            $('div.mensajeFinal').remove();
             e.preventDefault();
             let myForm = document.getElementById('form-id-detalle');
             let formData = new FormData(myForm);
@@ -131,10 +133,7 @@
                 url: 'GetEstado',
                 data: formData,
                 success: function (data) {
-                    //$('#error').html("");
-                    $('html, body').animate({scrollTop: 0}, 0);
-                    //$('div.flash-message').html(data);
-                    document.getElementById("form-id-detalle").reset();
+                    $('div.flash-message').html(data);
                 },
                 processData: false,
                 contentType: false,

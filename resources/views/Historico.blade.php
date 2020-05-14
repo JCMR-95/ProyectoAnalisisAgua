@@ -19,6 +19,7 @@
             <img src = "storage/Grafico.jpeg"/>
         </div>
         <div>
+        <div class="zonaRio" align="center">
             <h3>Seleccione Zona</h3>
 
             <form method="POST" action="{{ route('verDetalles') }}" enctype="multipart/form-data" id="form-id">

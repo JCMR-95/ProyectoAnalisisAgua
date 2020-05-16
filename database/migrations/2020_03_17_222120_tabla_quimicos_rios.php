@@ -19,7 +19,8 @@ class TablaQuimicosRios extends Migration
             $table->bigIncrements('id');
             $table->timestamps();
 			
-			$table->string('idPuntoRio')->nullable();
+            $table->string('idPuntoRio')->nullable();
+            $table->string('nombreSector')->nullable();
             $table->string('fecha')->nullable();
 
             $table->string('arsenico')->nullable();

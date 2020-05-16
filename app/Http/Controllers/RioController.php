@@ -62,8 +62,8 @@ class RioController extends Controller
         fecha,
         arsenico,
         boro,
-        cloro,
         cobalto,
+        cloro,
         cobre,
         cromo,
         ph,
@@ -96,35 +96,6 @@ class RioController extends Controller
         
         where idPuntoRio = :sector', ['sector' => $sector]);
         
-
-        //Hacer en una función aparte
-
-        $cantidadDatos = \DB::table('tabla_quimicos_rios')->where('idPuntoRio', $sector)
-        ->count();
-
-        for ($i = 0; $i <= $cantidadDatos-1; $i++) {
-            
-            $fecha = $datosQuimicos[$i]->fecha;
-            $arsenico = $datosQuimicos[$i]->arsenico;
-            $boro = $datosQuimicos[$i]->boro;
-            $cobalto = $datosQuimicos[$i]->cobalto;
-            $cloro = $datosQuimicos[$i]->cloro;
-            $cobre = $datosQuimicos[$i]->cobre;
-            $cromo = $datosQuimicos[$i]->cromo;
-            $ph = $datosQuimicos[$i]->ph;
-            $plomo = $datosQuimicos[$i]->plomo;
-            $zinc = $datosQuimicos[$i]->zinc;
-            $conducElectric = $datosQuimicos[$i]->consumo;
-            $calidadHumana = $this->calcularCalidadHumana($arsenico, $boro, $cloro, $cobalto, $cobre, $cromo, $ph, $plomo, $zinc, $conducElectric);
-            $calidadRiego = $this->calcularCalidadRiego($arsenico, $boro, $cloro, $cobalto, $cobre, $cromo, $ph, $plomo, $zinc, $conducElectric);
-            DB::table('tabla_quimicos_rios')
-                ->where('fecha', $fecha)
-                ->update(['calidadHumana' => $calidadHumana]);
-
-                DB::table('tabla_quimicos_rios')
-                ->where('fecha', $fecha)
-                ->update(['calidadRiego' => $calidadRiego]);
-        }
         return view('DetallesRio',compact('datosQuimicos', 'datosInfo'));
     }
 
@@ -136,8 +107,8 @@ class RioController extends Controller
         $fecha = $request->fecha;
         $arsenico = $request->arsenico;
         $boro = $request->boro;
-        $cloro = $request->cloro;
         $cobalto = $request->cobalto;
+        $cloro = $request->cloro;
         $cobre = $request->cobre;
         $cromo = $request->cromo;
         $ph = $request->ph;

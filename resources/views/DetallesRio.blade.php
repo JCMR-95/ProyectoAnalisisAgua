@@ -58,8 +58,8 @@
                 <th scope="col">Fecha</th>
                 <th scope="col">Arsénico</th>
                 <th scope="col">Boro</th>
-                <th scope="col">Cloro</th>
                 <th scope="col">Cobalto</th>
+                <th scope="col">Cloro</th>
                 <th scope="col">Cobre</th>
                 <th scope="col">Cromo</th>
                 <th scope="col">PH</th>
@@ -78,8 +78,8 @@
                     <th scope="row">{!! $datoQuimicos->fecha !!}</th>
                     <td scope="row">{!! $datoQuimicos->arsenico !!}</td>
                     <td scope="row">{!! $datoQuimicos->boro !!}</td>
-                    <td scope="row">{!! $datoQuimicos->cloro !!}</td>
                     <td scope="row">{!! $datoQuimicos->cobalto !!}</td>
+                    <td scope="row">{!! $datoQuimicos->cloro !!}</td>
                     <td scope="row">{!! $datoQuimicos->cobre !!}</td>
                     <td scope="row">{!! $datoQuimicos->cromo !!}</td>
                     <td scope="row">{!! $datoQuimicos->ph !!}</td>

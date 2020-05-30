@@ -136,24 +136,41 @@ class RioController extends Controller
             'calidadHumana' => $calidadHumana,
             'calidadRiego' => $calidadRiego]
         );
-        $this->checkCalidad($calidadHumana);
+        $this->checkCalidad($calidadHumana, $calidadRiego);
         return View::make('Mensajes');
 
     }
-    public function checkCalidad($calidadHumana){
-        if($calidadHumana == "No Apta"){
-            Session::flash('noApto', 'Resultado: No Apta. Existen uno o más elementos que están sobre el límite permitido para el consumo humano y uso de riego, por lo tanto no se puede usar.');
-        }else{
-            if($calidadHumana == "Calidad Baja"){
-                Session::flash('bajo', 'Resultado: Calidad Baja.');
-            }else{
-                if($calidadHumana == "Calidad Neutra"){
-                    Session::flash('neutro', 'Resultado: Calidad Neutra.');
-                }else{
-                    Session::flash('alto', 'Resultado: Calidad Alta.');
-                }
-            }
+    public function checkCalidad($calidadHumana, $calidadRiego){
+
+        if($calidadHumana == "No Apta" && $calidadRiego == "No Apta"){
+            Session::flash('noAptoNoApto', 'Resultado: Calidad Humana NO APTA - Calidad Riego NO APTA.');
         }
+        if($calidadHumana == "Calidad Baja" && $calidadRiego == "No Apta"){
+            Session::flash('bajoNoApto', 'Resultado: Calidad Humana BAJA - Calidad Riego NO APTA.');
+            
+        }
+        if($calidadHumana == "Calidad Neutra" && $calidadRiego == "No Apta"){
+            Session::flash('neutroNoApto', 'Resultado: Calidad Humana NEUTRA - Calidad Riego NO APTA.');
+        }
+        if($calidadHumana == "Calidad Alta" && $calidadRiego == "No Apta"){
+            Session::flash('altoNoApto', 'Resultado: Calidad Humana ALTA - Calidad Riego NO APTA.');
+        }
+
+
+        if($calidadHumana == "No Apta" && $calidadRiego == "Calidad Baja"){
+            Session::flash('noAptoBajo', 'Resultado: Calidad Humana NO APTA - Calidad Riego BAJA.');
+        }
+        if($calidadHumana == "Calidad Baja" && $calidadRiego == "Calidad Baja"){
+            Session::flash('bajoBajo', 'Resultado: Calidad Humana BAJA - Calidad Riego BAJA.');
+            
+        }
+        if($calidadHumana == "Calidad Neutra" && $calidadRiego == "Calidad Baja"){
+            Session::flash('neutroBajo', 'Resultado: Calidad Humana NEUTRA - Calidad Riego BAJA.');
+        }
+        if($calidadHumana == "Calidad Alta" && $calidadRiego == "Calidad Baja"){
+            Session::flash('altoBajo', 'Resultado: Calidad Humana ALTA - Calidad Riego BAJA.');
+        }
+                     
     }
 
     public function guardarHistorial(Request $request)
@@ -230,7 +247,7 @@ class RioController extends Controller
         $sector = $request->sector;
         $fecha = $request->fecha;
         $data = DB::table('tabla_quimicos_rios')->where(['idPuntoRio' => $sector, 'fecha' => $fecha])->first();
-        $this->checkCalidad($data->calidadHumana);
+        $this->checkCalidad($data->calidadHumana, $data->calidadRiego);
         return View::make('Mensajes');
     }
 

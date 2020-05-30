@@ -52,7 +52,7 @@
         </div>
 
         <div class="tituloRio" align="center">
-            <h1>Ver sección del rio</h1>
+            <h1>Ver sección del Río</h1>
         </div>
         <div class="page-content">
             <form method="POST" action="{{ route('verEstado') }}" enctype="multipart/form-data" id="form-id-detalle">

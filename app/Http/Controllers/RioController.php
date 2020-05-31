@@ -230,6 +230,15 @@ class RioController extends Controller
         return $calidadRiego;
     }
 
+    public function getSeccion(){
+        $datas = DB::table('tabla_info_rios')->get();
+        $output = '<option value="">Seleccione una sección del río</option>';
+        foreach($datas as $data){
+            $output .= '<option value="'.$data->idPuntoRio.'">'.$data->nombreEstacion.'</option>';
+        }
+        echo $output;
+    }
+
     public function getFechas(Request $request){
         $select = $request->get('select');
         $value = $request->get('value');

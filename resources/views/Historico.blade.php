@@ -19,8 +19,8 @@
             <img src = "storage/Grafico.jpeg"/>
         </div>
         <div>
-        <div class="zonaRio" align="center">
-            <h3>Seleccione Zona</h3>
+        <div class="form-group justify-content-center row">
+            <label for="idPuntoRio" class="col-sm-2 col-form-label">Sección del río Loa</label>
 
             <form method="POST" action="{{ route('verDetalles') }}" enctype="multipart/form-data" id="form-id">
                 {{ csrf_field() }}
@@ -28,16 +28,8 @@
 
                 <select id="sector"
                         name="sector"
-                        class="ol-sm-2 col-form-label"
+                        class="form-control sector"
                         required>
-
-                    <option value="001">Junta Río Salado</option>
-                    <option value="002">Angostura (CA)</option>
-                    <option value="003">Sifón Ayquina</option>
-                    <option value="004">Pozo Chiu Chiu</option>
-                    <option value="005">Yalquincha</option>
-                    <option value="006">Escorial</option>
-                    <option value="007">Finca</option>
                 </select>
 
                 <div class="col-md-3">
@@ -65,14 +57,6 @@
                                 class="form-control sector"
                                 data-dependent="fecha"
                                 required>
-                            <option value ="">Seleccione una sección del río</option>
-                            <option value="001">Junta Río Salado</option>
-                            <option value="002">Angostura (CA)</option>
-                            <option value="003">Sifón Ayquina</option>
-                            <option value="004">Pozo Chiu Chiu</option>
-                            <option value="005">Yalquincha</option>
-                            <option value="006">Escorial</option>
-                            <option value="007">Finca</option>
                         </select>
                     </div>
                 </div>
@@ -102,6 +86,13 @@
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $.ajax({
+           url:'GetSeccion',
+           method:'GET',
+            success:function(data){
+                $('.sector').html(data);
             }
         });
         $('.sector').change(function(){

@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+//Redireccionamiento
 Route::get('/', function () {
     return view('VistaPrincipal');
 });
@@ -26,10 +27,14 @@ Route::get('/verPrediccion', function(){
     return view('Prediccion');
 });
 
+//POST y GET de río
 Route::post('Detalles', 'RioController@verDetalles')->name('verDetalles');
 Route::post('VerPrediccion', 'RioController@verPrediccion')->name('verPrediccion');
 Route::post('GetFechas', 'RioController@getFechas');
 Route::post('GetEstado', 'RioController@getEstado')->name('verEstado');
+Route::get('GetSeccion', 'RioController@getSeccion')->name('getSeccion');
+
+//POST y GET de Excel
 Route::post('import-list-excel1', 'ExcelController@importExcelQuimicos')->name('import.quimicosRio');
 Route::post('import-list-excel2', 'ExcelController@importExcelInfo')->name('import.infoRio');
 Route::get('tabla_quimicos_rios/export/', 'ExcelController@exportarHistorico')->name('exportarHistorico');

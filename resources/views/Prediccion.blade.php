@@ -27,14 +27,6 @@
                                 name="sector"
                                 class="form-control"
                                 required>
-
-                            <option value="001">Junta Río Salado</option>
-                            <option value="002">Angostura (CA)</option>
-                            <option value="003">Sifón Ayquina</option>
-                            <option value="004">Pozo Chiu Chiu</option>
-                            <option value="005">Yalquincha</option>
-                            <option value="006">Escorial</option>
-                            <option value="007">Finca</option>
                         </select>
                     </div>
                 </div>
@@ -142,6 +134,13 @@
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax({
+        url:'GetSeccion',
+        method:'GET',
+        success:function(data){
+            $('#sector').html(data);
         }
     });
     $(".btn-primary").click(function(e){

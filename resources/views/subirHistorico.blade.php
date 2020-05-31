@@ -40,10 +40,6 @@
 
             <button>Importar Excel - Estación de Monitoreo</button>
         </form>
-
-        <button type="submit" class="btn btn-primary">
-                                <a href=" {{route('completarDatos')}} " class="btn btn-primary"> Completar Datos de Histórico </a>
-        </button>
     </div>
 
 </body>

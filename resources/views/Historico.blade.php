@@ -75,20 +75,9 @@
                 </div>
             </form>
         </div>
-
-        <div class="tituloRio" align="center">
-            <h3>Opciones</h3>
-        </div>
-
-        <div class="tituloRio" align="center">
-            <button type="submit" class="btn btn-primary">
-                <a href=" {{route('exportarHistorico')}} " class="btn btn-primary"> Exportar Excel </a>
-            </button>
-            <button type="submit" class="btn btn-primary">
-                <a href=" {{route('eliminarRepetidos')}} " class="btn btn-primary"> Eliminar Repetidos </a>
-            </button>
-        </div>
-
+        <button type="submit" class="btn btn-primary">
+            <a href=" {{route('exportarHistorico')}} " class="btn btn-primary"> Exportar Excel </a>
+        </button>
         <div class="flash-message"></div>
     </body>
 </html>

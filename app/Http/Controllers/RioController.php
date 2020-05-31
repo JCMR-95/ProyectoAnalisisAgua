@@ -196,6 +196,66 @@ class RioController extends Controller
         ]);
     }
 
+    public function completarDatosHistorico(){
+
+        $datosQuimicos = DB::select('select 
+
+        idPuntoRio,
+        fecha,
+        arsenico,
+        boro,
+        cobalto,
+        cloro,
+        cobre,
+        cromo,
+        ph,
+        plomo,
+        zinc,
+        consumo,
+        bico3,
+        calidadHumana,
+        calidadRiego
+
+        from tabla_quimicos_rios');
+
+        $cantidadDatos = \DB::table('tabla_quimicos_rios')->count();
+
+        for ($i = 0; $i <= $cantidadDatos-1; $i++) {
+            
+            $idPuntoRio = $datosQuimicos[$i]->idPuntoRio;
+            $fecha = $datosQuimicos[$i]->fecha;
+            $arsenico = $datosQuimicos[$i]->arsenico;
+            $boro = $datosQuimicos[$i]->boro;
+            $cobalto = $datosQuimicos[$i]->cobalto;
+            $cloro = $datosQuimicos[$i]->cloro;
+            $cobre = $datosQuimicos[$i]->cobre;
+            $cromo = $datosQuimicos[$i]->cromo;
+            $ph = $datosQuimicos[$i]->ph;
+            $plomo = $datosQuimicos[$i]->plomo;
+            $zinc = $datosQuimicos[$i]->zinc;
+            $conducElectric = $datosQuimicos[$i]->consumo;
+            $calidadHumana = $this->calcularCalidadHumana($arsenico, $boro, $cloro, $cobalto, $cobre, $cromo, $ph, $plomo, $zinc, $conducElectric);
+            $calidadRiego = $this->calcularCalidadRiego($arsenico, $boro, $cloro, $cobalto, $cobre, $cromo, $ph, $plomo, $zinc, $conducElectric);
+            $nombreSector = $this->obtenerNombreSector($idPuntoRio);
+
+                DB::table('tabla_quimicos_rios')
+                ->where('fecha', $fecha)
+                ->update(['calidadHumana' => $calidadHumana]);
+
+                DB::table('tabla_quimicos_rios')
+                ->where('fecha', $fecha)
+                ->update(['calidadRiego' => $calidadRiego]);
+
+                DB::table('tabla_quimicos_rios')
+                ->where('idPuntoRio', $idPuntoRio)
+                ->update(['nombreSector' => $nombreSector]);
+
+        }
+
+        return back()->with('message', 'Cálculo Completado');
+
+    }
+
     public function calcularCalidadHumana($arsenico, $boro, $cloro, $cobalto, $cobre, $cromo, $ph, $plomo, $zinc, $conducElectric){
         if($arsenico >= 0.2 || $boro >= 0.75 || $cobalto >= 0.05 || $cloro >= 400 || $cobre >= 2 || $cromo >= 0.05 || $ph >= 9 || $plomo >= 0.05 || $zinc >= 3 || $conducElectric >= 3000){
 
@@ -228,6 +288,68 @@ class RioController extends Controller
 
         }
         return $calidadRiego;
+    }
+
+    public function obtenerNombreSector($idPuntoRio){
+
+        $nombreSector = null;
+
+        if($idPuntoRio == "001"){
+            $nombreSector = "Junto Río Salado";
+        }
+        if($idPuntoRio == "002"){
+            $nombreSector = "Angostura";
+        }
+        if($idPuntoRio == "003"){
+            $nombreSector = "Sifón Ayquina";
+        }
+        if($idPuntoRio == "004"){
+            $nombreSector = "Pozo Chiu Chiu";
+        }
+        if($idPuntoRio == "005"){
+            $nombreSector = "Yalquincha";
+        }
+        if($idPuntoRio == "006"){
+            $nombreSector = "Escorial";
+        }
+        if($idPuntoRio == "007"){
+            $nombreSector = "Finca";
+        }
+
+        return $nombreSector;
+    }
+
+    public function eliminarRepetidosHistorico(){
+
+        $datosQuimicos = DB::select('select * from tabla_quimicos_rios');
+      
+        $cantidadDatos = \DB::table('tabla_quimicos_rios')->count();
+
+        for ($i = 0; $i <= $cantidadDatos-1; $i++) {
+            
+            $idPuntoRio1 = $datosQuimicos[$i]->idPuntoRio;
+            $fecha1 = $datosQuimicos[$i]->fecha;
+
+            for ($j = $i + 1; $j <= $cantidadDatos-$i; $j++) {
+            
+                $idPuntoRio2 = $datosQuimicos[$j]->idPuntoRio;
+                $fecha2 = $datosQuimicos[$j]->fecha;
+
+                if($idPuntoRio1 == $idPuntoRio2 && $fecha1 == $fecha2){
+                    
+                    $datoRepetido = DB::table('tabla_quimicos_rios')->where('fecha', $fecha2)->first();
+                    $idDelRepetido = $datoRepetido->id;
+
+                    DB::table('tabla_quimicos_rios')->where('id', '=', $idDelRepetido)->delete();
+                    
+                    $cantidadDatos = $cantidadDatos-1;
+
+                }
+            }
+        }
+
+        return back()->with('message', 'Listo');
+
     }
 
     public function getSeccion(){

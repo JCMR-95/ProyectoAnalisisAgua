@@ -16,25 +16,41 @@
     
     <div class="tituloRio" align="center">
         <h1>Importar datos</h1>
+
+
+        <form action="{{ route('import.quimicosRio') }}" method="post" enctype="multipart/form-data">
+            @csrf
+
+            @if(Session::has('message'))
+                <p>{{ Session::get('message') }}</p>
+            @endif
+
+            <input type="file" name="file">
+
+            <button>Importar Excel - Parámetros Fisicoquímicos</button>
+        </form>
+
+        <form action="{{ route('import.infoRio') }}" method="post" enctype="multipart/form-data">
+            @csrf
+
+            @if(Session::has('message'))
+                <p>{{ Session::get('message') }}</p>
+            @endif
+
+            <input type="file" name="file">
+
+            <button>Importar Excel - Estación de Monitoreo</button>
+        </form>
+
+
+        <button type="submit" class="btn btn-primary">
+                                <a href=" {{route('completarDatos')}} " class="btn btn-primary"> Completar Datos de Histórico </a>
+        </button>
+
         @if(Session::has('message'))
             <p>{{ Session::get('message') }}</p>
         @endif
-        <div class="form-group justify-content-center row">
-            <form action="{{ route('import.infoRio') }}" method="post" enctype="multipart/form-data">
-                <label for="file" class="col-sm-3 col-form-label">1.- Ingrese el archivo de estaciones</label>
-                @csrf
-                <input type="file" name="file">
-                <button>Importar Excel - Estación de Monitoreo</button>
-            </form>
-        </div>
-        <div class="form-group justify-content-center row">
-            <form action="{{ route('import.quimicosRio') }}" method="post" enctype="multipart/form-data">
-                <label for="file" class="col-sm-3 col-form-label">2.- Ingrese el archivo de parámetros fisicoquímicos</label>
-                @csrf
-                <input type="file" name="file">
-                <button>Importar Excel - Parámetros Fisicoquímicos</button>
-            </form>
-        </div>
+        
     </div>
 
 </body>

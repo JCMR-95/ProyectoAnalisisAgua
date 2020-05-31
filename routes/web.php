@@ -31,6 +31,8 @@ Route::get('/verPrediccion', function(){
 Route::post('Detalles', 'RioController@verDetalles')->name('verDetalles');
 Route::post('VerPrediccion', 'RioController@verPrediccion')->name('verPrediccion');
 Route::post('GetFechas', 'RioController@getFechas');
+Route::get('CompletarDatos', 'RioController@completarDatosHistorico')->name('completarDatos');
+Route::get('EliminarRepetidos', 'RioController@eliminarRepetidosHistorico')->name('eliminarRepetidos');
 Route::post('GetEstado', 'RioController@getEstado')->name('verEstado');
 Route::get('GetSeccion', 'RioController@getSeccion')->name('getSeccion');
 

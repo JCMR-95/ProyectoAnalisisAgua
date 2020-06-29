@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class TablaPrediccionRio extends Migration
+class TablaPrediccionRios extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class TablaPrediccionRio extends Migration
      */
     public function up()
     {
-        Schema::create('tabla_prediccion_rio', function (Blueprint $table) {
+        Schema::create('tabla_prediccion_rios', function (Blueprint $table) {
 
             $table->bigIncrements('id');
             $table->timestamps();

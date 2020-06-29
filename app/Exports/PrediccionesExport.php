@@ -2,7 +2,7 @@
 
 namespace App\Exports;
 
-use App\tabla_prediccion_rio;
+use App\tabla_prediccion_rios;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 
@@ -13,7 +13,7 @@ class PrediccionesExport implements FromCollection, WithHeadings
     */
     public function collection()
     {
-        return tabla_prediccion_rio::all();
+        return tabla_prediccion_rios::all();
     }
 
     public function headings(): array

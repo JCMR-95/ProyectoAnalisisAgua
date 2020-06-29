@@ -109,7 +109,7 @@ class RioController extends Controller
 
 
     /* Función que obtiene todos los datos enviados de cada elemento químicco para luego re-enviarlos a 
-    "calcularCalidadHumana" y "calcularCalidadRiego", sus resultados obtenidos los guardará en tabla_prediccion_rio
+    "calcularCalidadHumana" y "calcularCalidadRiego", sus resultados obtenidos los guardará en tabla_prediccion_rios
     y luego desplegará un mensaje por pantalla. */
 
     public function verPrediccion(Request $request)
@@ -131,7 +131,7 @@ class RioController extends Controller
         $calidadHumana = $this->calcularCalidadHumana($arsenico, $boro, $cloro, $cobalto, $cobre, $cromo, $ph, $plomo, $zinc, $conducElectric);
         $calidadRiego = $this->calcularCalidadRiego($arsenico, $boro, $cloro, $cobalto, $cobre, $cromo, $ph, $plomo, $zinc, $conducElectric);
 
-        DB::table('tabla_prediccion_rio')->insert(
+        DB::table('tabla_prediccion_rios')->insert(
             ['idPuntoRio' => $sector, 
             'fecha' => $fecha,
             'arsenico' => $arsenico,

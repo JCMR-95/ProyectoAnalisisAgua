@@ -120,12 +120,14 @@
                     <button type="submit" class="btn btn-primary">
                         {{ __('Ver Información') }}
                     </button>
+                    
+                    <button type="submit" class="btn btn-secondary">
+                        <a href=" {{route('exportarPredicciones')}} " class="btn btn-secondary"> Exportar Excel </a>
+                    </button>
                 </div>
             </form>
         </div>
-        <button type="submit" class="btn btn-primary">
-                                <a href=" {{route('exportarPredicciones')}} " class="btn btn-primary"> Exportar Excel </a>
-        </button>
+        
         <div class="flash-message"></div>
     </body>
 </html>

@@ -9,6 +9,10 @@ use View;
 
 class RioController extends Controller
 {
+
+    /* Función que verifica el formato a ingresar de todos los elementos químicos, desplegando
+    un mensaje correspondiente en caso de un error. */
+    
     public function validar(Request $request){
         $reglas = [
             'fecha' => 'required',
@@ -52,6 +56,10 @@ class RioController extends Controller
 
         $this->validate($request, $reglas, $mensajes);
     }
+
+    
+    /* Función que carga todos los datos de la tabla_quimicos_rios según el sector seleccionado en 
+    Historico.blade.php para luego desplegarlos en la vista DetallesRio.blade.php */
 
     public function verDetalles(Request $request)
     {
@@ -100,6 +108,10 @@ class RioController extends Controller
     }
 
 
+    /* Función que obtiene todos los datos enviados de cada elemento químicco para luego re-enviarlos a 
+    "calcularCalidadHumana" y "calcularCalidadRiego", sus resultados obtenidos los guardará en tabla_prediccion_rio
+    y luego desplegará un mensaje por pantalla. */
+
     public function verPrediccion(Request $request)
     {
         self::validar($request);
@@ -140,6 +152,9 @@ class RioController extends Controller
         return View::make('Mensajes');
 
     }
+
+    /* Función que despliega un mensaje por pantalla dependiendo de los valores $calidadHumana y $calidadRiego */
+
     public function checkCalidad($calidadHumana, $calidadRiego){
 
         if($calidadHumana == "No Apta" && $calidadRiego == "No Apta"){
@@ -173,6 +188,10 @@ class RioController extends Controller
                      
     }
 
+
+    /* Función que guarda la fecha de una consulta, actualmente NO se está ocupando esta función, pero
+    puede ser útil para una versión futura. */
+
     public function guardarHistorial(Request $request)
     {
 
@@ -195,6 +214,10 @@ class RioController extends Controller
 
         ]);
     }
+
+
+    /* Función que calcula $calidadHumana y $calidadRiego para rellenar los campos calidadHumana y calidadRiego 
+    de tabla_quimicos_rios. También obtiene el nombre del sector del río dependiendo de su $idPuntoRio. */
 
     public function completarDatosHistorico(){
 
@@ -256,6 +279,10 @@ class RioController extends Controller
 
     }
 
+
+    /* Función que calcula la Calidad de Consumo Humano según los valores de los elementos químicos, para luego
+    retornar un parámetro indicando la situación. Sus resultados son ocupados en varias funciones. */
+
     public function calcularCalidadHumana($arsenico, $boro, $cloro, $cobalto, $cobre, $cromo, $ph, $plomo, $zinc, $conducElectric){
         if($arsenico >= 0.2 || $boro >= 0.75 || $cobalto >= 0.05 || $cloro >= 400 || $cobre >= 2 || $cromo >= 0.05 || $ph >= 9 || $plomo >= 0.05 || $zinc >= 3 || $conducElectric >= 3000){
 
@@ -276,6 +303,10 @@ class RioController extends Controller
         return $calidadHumana;
     }
 
+
+    /* Función que calcula la Calidad de Riego según los valores de los elementos químicos, para luego
+    retornar un parámetro indicando la situación. Sus resultados son ocupados en varias funciones. */
+
     public function calcularCalidadRiego($arsenico, $boro, $cloro, $cobalto, $cobre, $cromo, $ph, $plomo, $zinc, $conducElectric){
 
         if($arsenico >= 0.2 || $boro >= 0.75 || $cobalto >= 0.05 || $cloro < 180 || $cobre >= 0.2 || $cromo >= 0.1 || $ph >= 9 || $plomo >= 0.5 || $zinc >= 2 || $conducElectric >= 3000){
@@ -289,6 +320,10 @@ class RioController extends Controller
         }
         return $calidadRiego;
     }
+
+
+    /* Funcion que retorna un parámetro con el nombre del sector del río sependiendo de $idPuntoRio que se
+    le envíe. */
 
     public function obtenerNombreSector($idPuntoRio){
 
@@ -318,6 +353,9 @@ class RioController extends Controller
 
         return $nombreSector;
     }
+
+
+    /* Función actualmente en desarrollo. */
 
     public function eliminarRepetidosHistorico(){
 
@@ -352,6 +390,9 @@ class RioController extends Controller
 
     }
 
+
+    /*  */
+
     public function getSeccion(){
         $datas = DB::table('tabla_info_rios')->get();
         $output = '<option value="">Seleccione una sección del río</option>';
@@ -361,6 +402,9 @@ class RioController extends Controller
         echo $output;
     }
 
+
+    /*  */
+    
     public function getFechas(Request $request){
         $select = $request->get('select');
         $value = $request->get('value');
@@ -374,6 +418,8 @@ class RioController extends Controller
         echo $output;
     }
 
+
+    /*  */
     public function getEstado(Request $request){
         $sector = $request->sector;
         $fecha = $request->fecha;
